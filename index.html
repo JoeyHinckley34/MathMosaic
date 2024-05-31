@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    body {
+        background-color: #ffffcc; /* Soft yellow */
+        transition: background-color 0.5s ease; /* Smooth transition */
+    }
+    h1, h2, p, div {
+        text-align: center;
+    }
+    .digits, .operators, .equation-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .digits button, .operators button, .equation-container button {
+        margin: 0 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+
+    .operators button {
+        margin: 0 10px;
+    }
+
+    #equation {
+        margin-right: 10px;
+    }
+
+    .disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    .correct-bg {
+        background-color: #ccffcc !important; /* Soft green */
+    }
+
+    .incorrect-bg {
+        background-color: #ffcccc !important; /* Soft red */
+    }
+
+</style>
+</head>
+<body id="body">
+
+<h1>MathMosaic</h1>
+<h2 id="target">Target: 10</h2>
+<div class="equation-container">
+    <div id="equation"></div>
+    <div id="result"></div>
+</div>
+<div class="digits" id="digits">
+    <button onclick="insertValue(this)">1</button>
+    <button onclick="insertValue(this)">2</button>
+    <button onclick="insertValue(this)">3</button>
+    <button onclick="insertValue(this)">4</button>
+</div>
+<div class="operators">
+    <button onclick="insertValue(this)">+</button>
+    <button onclick="insertValue(this)">-</button>
+    <button onclick="insertValue(this)" class="multiply">*</button>
+    <button onclick="insertValue(this)">/</button>
+</div>
+<div class="equation-container">
+    <button onclick="deleteLast()">Delete</button>
+</div>
+
+<script>
+    var usedNumbers = [];
+    var numberButtons = document.querySelectorAll('.digits button');
+    var targetNumber = parseInt(document.getElementById('target').textContent.split(': ')[1]);
+    var body = document.getElementById('body');
+
+    function insertValue(button) {
+        var equation = document.getElementById('equation');
+        var value = button.textContent;
+        if (!isNaN(value)) {
+            equation.textContent += value;
+            button.classList.add('disabled');
+            usedNumbers.push(value);
+            checkForCalculation();
+        } else {
+            equation.textContent += value;
+        }
+    }
+
+    function deleteLast() {
+        var equation = document.getElementById('equation');
+        var resultDisplay = document.getElementById('result');
+        var lastCharacter = equation.textContent.slice(-1);
+        var buttons = document.querySelectorAll('.digits button');
+        for (var i = 0; i < buttons.length; i++) {
+            if (buttons[i].textContent === lastCharacter) {
+                buttons[i].classList.remove('disabled');
+                break;
+            }
+        }
+        equation.textContent = equation.textContent.slice(0, -1);
+        if (!isNaN(lastCharacter)) {
+            usedNumbers.pop();
+        }
+        resultDisplay.textContent = ''; // Clear result when deleting
+        updateBackgroundColor();
+    }
+
+    function checkForCalculation() {
+        if (usedNumbers.length === numberButtons.length) {
+            calculate();
+        } else {
+            updateBackgroundColor();
+        }
+    }
+
+    function calculate() {
+        var equation = document.getElementById('equation').textContent;
+        try {
+            var result = eval(equation);
+            if (isNaN(result) || !isFinite(result)) {
+                displayResult("Not a valid equation", false);
+            } else {
+                displayResult(result, result === targetNumber);
+            }
+        } catch (error) {
+            displayResult("Not a valid equation", false);
+        }
+    }
+
+    function displayResult(result, correct) {
+        var resultDisplay = document.getElementById('result');
+        resultDisplay.textContent = result;
+        if (correct) {
+            body.classList.remove('incorrect-bg');
+            body.classList.add('correct-bg');
+        } else {
+            body.classList.remove('correct-bg');
+            body.classList.add('incorrect-bg');
+        }
+    }
+
+    function updateBackgroundColor() {
+        body.classList.remove('correct-bg', 'incorrect-bg');
+        body.style.backgroundColor = '#ffffcc'; // Reset to soft yellow
+    }
+</script>
+
+</body>
+</html>
