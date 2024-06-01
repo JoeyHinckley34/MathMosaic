@@ -287,16 +287,15 @@
     function nextLevel() {
         document.getElementById('popup').classList.add('hidden');
         currentLevel = (currentLevel + 1) % levels.length;
+        var levelSelect = document.getElementById('levelSelect');
+        levelSelect.value = currentLevel;
         initLevel(currentLevel);
     }
 
-
-    
     function resetBackgroundColor() {
         body.classList.remove('correct-bg', 'incorrect-bg');
         body.style.backgroundColor = '#ffffcc';
     }
-
 
     function updateBackgroundColor() {
         body.classList.remove('correct-bg', 'incorrect-bg');
