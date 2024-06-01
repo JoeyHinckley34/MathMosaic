@@ -44,6 +44,37 @@
     .incorrect-bg {
         background-color: #ffcccc !important; /* Soft red */
     }
+
+
+    .hidden {
+        display: none;
+    }
+
+    .popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .popup-content {
+        background-color: #fff;
+        padding: 20px;
+        text-align: center;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    }
+
+    .popup-content button {
+        margin: 10px;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
     @media only screen and (max-width: 600px) {
             .digits, .operators {
                 font-size: 18px;
@@ -59,6 +90,7 @@
                 font-size: 20px;
             }
         }
+
 
 </style>
 </head>
@@ -77,10 +109,12 @@
     <!-- Digits will be inserted here dynamically -->
 </div>
 <div class="operators">
+    <!-- <button onclick="insertValue(this)">(</button> -->
     <button onclick="insertValue(this)">+</button>
     <button onclick="insertValue(this)">-</button>
-    <button onclick="insertValue(this)" class="multiply">*</button>
+    <button onclick="insertValue(this)">*</button>
     <button onclick="insertValue(this)">/</button>
+    <!-- <button onclick="insertValue(this)">)</button> -->
 </div>
 <div class="equation-container">
     <button onclick="deleteLast()">Delete</button>
@@ -88,6 +122,17 @@
         <!-- Levels will be inserted here dynamically -->
     </select>
 </div>
+
+<div id="popup" class="hidden">
+    <div class="popup-content">
+        <h2 id="popup-message">NICE WORK!</h2>
+        <p id="solution-display"></p>
+        <button onclick="nextLevel()">NEXT LEVEL</button>
+        <button onclick="closePopup()">Admire your work</button>
+    </div>
+</div>
+
+
 
 <script>
     var levels = [
@@ -222,11 +267,36 @@
         if (correct) {
             body.classList.remove('incorrect-bg');
             body.classList.add('correct-bg');
+            showPopup(result);
         } else {
             body.classList.remove('correct-bg');
             body.classList.add('incorrect-bg');
         }
     }
+
+    function showPopup(solution) {
+        document.getElementById('solution-display').textContent = `Solution: ${solution}`;
+        document.getElementById('popup').classList.remove('hidden');
+    }
+
+    function closePopup() {
+        document.getElementById('popup').classList.add('hidden');
+        // resetBackgroundColor();
+    }
+
+    function nextLevel() {
+        document.getElementById('popup').classList.add('hidden');
+        currentLevel = (currentLevel + 1) % levels.length;
+        initLevel(currentLevel);
+    }
+
+
+    
+    function resetBackgroundColor() {
+        body.classList.remove('correct-bg', 'incorrect-bg');
+        body.style.backgroundColor = '#ffffcc';
+    }
+
 
     function updateBackgroundColor() {
         body.classList.remove('correct-bg', 'incorrect-bg');
@@ -249,7 +319,6 @@
         currentLevel = parseInt(levelSelect.value);
         initLevel(currentLevel);
     }
-
     // Populate the dropdown and initialize the first level
     populateLevelDropdown();
     initLevel(currentLevel);
@@ -258,3 +327,9 @@
 
 </body>
 </html>
+
+
+
+
+
+
