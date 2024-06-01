@@ -1,0 +1,17 @@
+var levels = [
+        { target: 10, numbers: [1, 2, 3, 4], instructions: "Welcome to MathMosaic! The goal is to use the numbers below to create an equation that equals the target number. Use each number once. Good luck!" },
+        { target: 322, numbers: [1, 2, 3, 4], instructions: "Combining digits like 12+34 is valid. The only rule is use each number once to reach the target number." },
+        { target: 11, numbers: [1, 2, 3, 4], instructions: "New challenges ahead! Have Fun!" },
+        { target: 0, numbers: [1, 2, 3, 4]},
+        { target: 16, numbers: [5, 5, 5, 5], instructions: "BUG ALERT: Numbers that are the same break my delete function :/ just refresh to try again"},
+        { target: 35, numbers: [2, 3, 6, 8], instructions: "Let's keep the number unique for now"},
+        { target: 30, numbers: [2, 3, 6, 9]},
+        { target: 9, numbers: [2, 3, 4, 6]},
+        { target: 30, numbers: [2, 3, 6, 9]},
+        { target: 210, numbers: [2, 6, 7, 8]},
+        { target: 15, numbers: [1, 2, 3, 4, 5], instructions: "Wait we can have more than four numbers?"},
+        { target: 7, numbers: [1, 3, 4, 5, 7]},
+        { target: 99, numbers: [2, 3, 4, 6, 7]},
+        { target: 45, numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9], instructions: "This seems excessive."},
+        { target: 8, numbers: [-1, 2, 3, 4], instructions: "Negatives for sure do not break everything lol"},
+    ];

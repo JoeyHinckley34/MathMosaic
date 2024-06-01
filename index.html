@@ -48,33 +48,102 @@
 <body id="body">
 
 <h1>MathMosaic</h1>
-<p>Arrange digits and operators to equal target number.</p>
-<h2 id="target">Target: 322</h2>
+<p id="instructions"></p>
+<p id="level-instructions"></p>
+
+<h2 id="target">Target: 10</h2>
 <div class="equation-container">
     <div id="equation"></div>
     <div id="result"></div>
 </div>
 <div class="digits" id="digits">
-    <button onclick="insertValue(this)">1</button>
-    <button onclick="insertValue(this)">2</button>
-    <button onclick="insertValue(this)">3</button>
-    <button onclick="insertValue(this)">4</button>
+    <!-- Digits will be inserted here dynamically -->
 </div>
 <div class="operators">
     <button onclick="insertValue(this)">+</button>
     <button onclick="insertValue(this)">-</button>
-    <button onclick="insertValue(this)">*</button>
+    <button onclick="insertValue(this)" class="multiply">*</button>
     <button onclick="insertValue(this)">/</button>
 </div>
 <div class="equation-container">
     <button onclick="deleteLast()">Delete</button>
+    <select id="levelSelect" onchange="selectLevel()">
+        <!-- Levels will be inserted here dynamically -->
+    </select>
 </div>
 
 <script>
+    var levels = [
+        { target: 10, numbers: [1, 2, 3, 4], instructions: "Welcome to MathMosaic! The goal is to use the numbers below to create an equation that equals the target number. Use each number once. Good luck!" },
+        { target: 322, numbers: [1, 2, 3, 4], instructions: "Combining digits like 12+34 is valid. The only rule is use each number once to reach the target number." },
+        { target: 11, numbers: [1, 2, 3, 4], instructions: "New challenges ahead! Have Fun!" },
+        { target: 0, numbers: [1, 2, 3, 4]},
+        { target: 16, numbers: [5, 5, 5, 5], instructions: "BUG ALERT: Numbers that are the same break my delete function :/ just refresh to try again"},
+        { target: 35, numbers: [2, 3, 6, 8], instructions: "Let's keep the number unique for now"},
+        { target: 30, numbers: [2, 3, 6, 9]},
+        { target: 9, numbers: [2, 3, 4, 6]},
+        { target: 30, numbers: [2, 3, 6, 9]},
+        { target: 210, numbers: [2, 6, 7, 8]},
+        { target: 15, numbers: [1, 2, 3, 4, 5], instructions: "Wait we can have more than four numbers?"},
+        { target: 7, numbers: [1, 3, 4, 5, 7]},
+        { target: 99, numbers: [2, 3, 4, 6, 7]},
+        { target: 45, numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9], instructions: "This seems excessive."},
+        { target: 8, numbers: [-1, 2, 3, 4], instructions: "Negatives for sure do not break everything lol"},
+    ];
+
+    var currentLevel = 0;
+    var targetNumber;
     var usedNumbers = [];
-    var numberButtons = document.querySelectorAll('.digits button');
-    var targetNumber = parseInt(document.getElementById('target').textContent.split(': ')[1]);
+    var numberButtons;
     var body = document.getElementById('body');
+
+    function initLevel(levelIndex) {
+        var level = levels[levelIndex];
+        targetNumber = level.target;
+        usedNumbers = [];
+
+        setTarget(targetNumber);
+        clearEquationAndResult();
+        resetBackgroundColor();
+        updateInstructions(levelIndex, level.instructions);
+        createDigitButtons(level.numbers);
+
+        numberButtons = document.querySelectorAll('.digits button');
+    }
+
+    function setTarget(target) {
+        document.getElementById('target').textContent = 'Target: ' + target;
+    }
+
+    function clearEquationAndResult() {
+        document.getElementById('equation').textContent = '';
+        document.getElementById('result').textContent = '';
+    }
+
+    function resetBackgroundColor() {
+        body.classList.remove('correct-bg', 'incorrect-bg');
+        body.style.backgroundColor = '#ffffcc';
+    }
+
+    function updateInstructions(levelIndex, instructions) {
+        if (levelIndex === 0) {
+            document.getElementById('instructions').style.display = 'block';
+        } else {
+            document.getElementById('instructions').style.display = 'none';
+        }
+        document.getElementById('level-instructions').textContent = instructions;
+    }
+
+    function createDigitButtons(numbers) {
+        var digitsContainer = document.getElementById('digits');
+        digitsContainer.innerHTML = '';
+        numbers.forEach(function(number) {
+            var button = document.createElement('button');
+            button.textContent = number;
+            button.onclick = function() { insertValue(button); };
+            digitsContainer.appendChild(button);
+        });
+    }
 
     function insertValue(button) {
         var equation = document.getElementById('equation');
@@ -146,6 +215,28 @@
         body.classList.remove('correct-bg', 'incorrect-bg');
         body.style.backgroundColor = '#ffffcc'; // Reset to soft yellow
     }
+
+    function populateLevelDropdown() {
+        var levelSelect = document.getElementById('levelSelect');
+        levelSelect.innerHTML = '';
+        levels.forEach(function(level, index) {
+            var option = document.createElement('option');
+            option.value = index;
+            option.textContent = 'Level ' + (index + 1);
+            levelSelect.appendChild(option);
+        });
+    }
+
+    function selectLevel() {
+        var levelSelect = document.getElementById('levelSelect');
+        currentLevel = parseInt(levelSelect.value);
+        initLevel(currentLevel);
+    }
+
+    // Populate the dropdown and initialize the first level
+    populateLevelDropdown();
+    initLevel(currentLevel);
+
 </script>
 
 </body>
