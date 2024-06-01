@@ -252,30 +252,30 @@
         try {
             var result = eval(equation);
             if (isNaN(result) || !isFinite(result)) {
-                displayResult("Not a valid equation", false);
+                displayResult("Not a valid equation", false, equation);
             } else {
-                displayResult(result, result === targetNumber);
+                displayResult(result, result === targetNumber, equation);
             }
         } catch (error) {
-            displayResult("Not a valid equation", false);
+            displayResult("Not a valid equation", false, equation);
         }
     }
 
-    function displayResult(result, correct) {
+    function displayResult(result, correct, equation) {
         var resultDisplay = document.getElementById('result');
         resultDisplay.textContent = result;
         if (correct) {
             body.classList.remove('incorrect-bg');
             body.classList.add('correct-bg');
-            showPopup(result);
+            showPopup(equation,result);
         } else {
             body.classList.remove('correct-bg');
             body.classList.add('incorrect-bg');
         }
     }
 
-    function showPopup(solution) {
-        document.getElementById('solution-display').textContent = `Solution: ${solution}`;
+    function showPopup(solution,result) {
+        document.getElementById('solution-display').textContent = `Solution: ${solution} = ${result}`;
         document.getElementById('popup').classList.remove('hidden');
     }
 
