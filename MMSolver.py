@@ -37,22 +37,29 @@ def getAllTargets(AEs):
                 ATs[e] = [ae]
         except ZeroDivisionError:
             print(f"Division by zero is not allowe: {ae}")
+        except SyntaxError:
+            print(f"Synatax Error: Eval({ae})")
     return ATs
 
 
 def getAllSolutions(nums,ops,target):
     AEs = getAllEquations(nums, ops)
     ATs = getAllTargets(AEs)
-    return ATs[target]
-   
     sortedATs = dict(sorted(ATs.items()))
     for key, val in sortedATs.items():
         print(key,val)
 
+    if target in ATs:
+        return ATs[target]
+    else:
+        return "No Solutions"
+   
+ 
+
 def main():
-    nums = [2, 3, 4, 6, 7]
+    nums = [2, 0, 4, 8]
     ops = ['+', '-', '*', '/']
-    target = 99
+    target = 78
     print(getAllSolutions(nums,ops,target))
 
 if __name__ == '__main__':
