@@ -163,7 +163,11 @@ function populatePastProblems() {
             pastSelect.appendChild(option);
         }
     });
+
+    // Set the selected option to today's date
+    pastSelect.value = today;
 }
+
 
 function selectPastProblem() {
     const pastSelect = document.getElementById('pastSelect');
@@ -171,8 +175,10 @@ function selectPastProblem() {
     const problem = dailyLevel.find(p => p.date === selectedDate);
     if (problem) {
         displayProblem(selectedDate, problem);
+        document.getElementById('date').textContent = selectedDate; // Update displayed date
     }
 }
+
 
 function showHint() {
     if (currentProblem && currentProblem.hint) {
