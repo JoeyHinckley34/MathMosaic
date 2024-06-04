@@ -46,16 +46,16 @@ def getAllTargets(AEs):
 def getAllSolutions(nums,ops,target):
     AEs = getAllEquations(nums, ops)
     ATs = getAllTargets(AEs)
-    # sortedATs = dict(sorted(ATs.items()))
-    # for key, val in sortedATs.items():
-    #     print(key,val)
+    sortedATs = dict(sorted(ATs.items()))
+    for key, val in sortedATs.items():
+        print(key,val)
     if target in ATs:
         return ATs[target]
     else:
         return "No Solutions"
    
 def main():
-    nums = [3, 4, 9, 8]
+    nums = [6, 7, 8, 9]
     ops = ['+', '-', '*', '/']
     target = 105
     print(getAllSolutions(nums,ops,target))

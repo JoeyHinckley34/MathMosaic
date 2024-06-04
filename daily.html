@@ -6,10 +6,10 @@
     <script src="dailyScript.js" defer></script>
 </head>
 <body id="body">
-    <h1>MathMosaic Daily Problem</h1>
+    <h1>MathMosaic Daily</h1>
     <p id="date"></p>
     <p id="instructions"></p>
-    <h2 id="target">Target: 10</h2>
+    <h2 id="target">Target: 13</h2>
     <div class="equation-container">
         <div id="equation"></div>
         <div id="result"></div>
@@ -25,11 +25,15 @@
     </div>
     <div class="equation-container">
         <button onclick="deleteLast()">Delete</button>
+        <select id="levelSelect" onchange="selectLevel()">
+            <!-- Levels will be inserted here dynamically -->
+        </select>
     </div>
     <div id="popup" class="hidden">
         <div class="popup-content">
             <h2 id="popup-message">NICE WORK!</h2>
             <p id="solution-display"></p>
+
             <button onclick="closePopup()">Admire your work</button>
         </div>
     </div>

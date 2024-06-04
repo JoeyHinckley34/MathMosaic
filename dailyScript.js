@@ -1,18 +1,25 @@
-var dailyLevel = { target: 13, numbers: [2, 4, 6, 8], instructions: "Solve the daily problem by using each number once to reach the target!" };
+var dailyLevel = [
+    { date: "06-03-2024", target: 13, numbers: [2, 4, 6, 8], instructions: "Solve the daily problem by using each number once to reach the target!" },
+    { date: "06-04-2024", target: 5, numbers: [6, 7, 8, 9], instructions: "Solve the daily problem by using each number once to reach the target!" }    
+];
+
+var currentLevel = 0;
+
 var targetNumber;
 var usedNumbers = [];
 var numberButtons;
 var body = document.getElementById('body');
 
-function initDailyLevel() {
-    targetNumber = dailyLevel.target;
+function initDailyLevel(levelIndex) {
+    var level = dailyLevel[levelIndex]
+    targetNumber = level.target;
     usedNumbers = [];
 
     setTarget(targetNumber);
     clearEquationAndResult();
     resetBackgroundColor();
-    updateInstructions(dailyLevel.instructions);
-    createDigitButtons(dailyLevel.numbers);
+    updateInstructions(level.instructions);
+    createDigitButtons(level.numbers);
 
     numberButtons = document.querySelectorAll('.digits button');
     updateDate();
@@ -129,5 +136,35 @@ function updateDate() {
     document.getElementById('date').textContent = dateString;
 }
 
+function resetBackgroundColor() {
+    body.classList.remove('correct-bg', 'incorrect-bg');
+    body.style.backgroundColor = '#ffffcc';
+}
+
+function updateBackgroundColor() {
+    body.classList.remove('correct-bg', 'incorrect-bg');
+    body.style.backgroundColor = '#ffffcc'; // Reset to soft yellow
+}
+
+function populateLevelDropdown() {
+    var levelSelect = document.getElementById('levelSelect');
+    levelSelect.innerHTML = '';
+    dailyLevel.forEach(function(level, index) {
+        var option = document.createElement('option');
+        option.value = index;
+        option.textContent = 'MathMosaic ' + (index + 1);
+        levelSelect.appendChild(option);
+    });
+}
+
+function selectLevel() {
+    var levelSelect = document.getElementById('levelSelect');
+    currentLevel = parseInt(levelSelect.value);
+    initDailyLevel(currentLevel);
+}
 // Initialize the daily level
-initDailyLevel();
+initDailyLevel(currentLevel);
+
+// Populate the dropdown and initialize the first level
+populateLevelDropdown();
+

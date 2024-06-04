@@ -15,7 +15,7 @@ var levels = [
     { target: 104, numbers: [1, 7, 8, 9], instructions: "3 unique solutions here, 1 very challenging"},
     { target: 100, numbers: [5, 6, 7, 8]},
     { target: 11, numbers: [3, 4, 7, 9]},
-    { target: 13, numbers: [2, 4, 6, 8]},
+    { target: 13, numbers: [2, 4, 6, 8], instructions: "The First MathMosaic 06/03/2024"},
     { target: 22, numbers: [3, 5, 7, 9]},
     { target: 78, numbers: [1, 6, 8, 9]},
     { target: 52, numbers: [2, 0, 4, 8], instructions: "2 very different solutions here"}
