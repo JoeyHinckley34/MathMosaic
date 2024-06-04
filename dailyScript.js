@@ -1,18 +1,18 @@
 var dailyLevel = [
-    { date: "2024-06-03", target: 13, numbers: [2, 4, 6, 8], instructions: "Solve the daily problem by using each number once to reach the target!" },
-    { date: "2024-06-04", target: 5, numbers: [6, 7, 8, 9], instructions: "Solve the daily problem by using each number once to reach the target!" },
-    { date: "2024-06-05", target: 18, numbers: [3, 4, 5, 9], instructions: "Solve the daily problem by using each number once to reach the target!" },
-    { date: "2024-06-06", target: 30, numbers: [2, 3, 4, 5], instructions: "Solve the daily problem by using each number once to reach the target!" },
-    { date: "2024-06-07", target: 84, numbers: [1, 2, 6, 8], instructions: "Solve the daily problem by using each number once to reach the target!" },
-    { date: "2024-06-08", target: 2, numbers: [4, 5, 7, 9], instructions: "Solve the daily problem by using each number once to reach the target!" },
-    { date: "2024-06-09", target: 14, numbers: [2, 5, 6, 8], instructions: "Solve the daily problem by using each number once to reach the target!" },
-]
-;
+    { date: "2024-06-03", target: 13, numbers: [2, 4, 6, 8], instructions: "Solve the daily problem by using each number once to reach the target!", hint: "Two Solutions: 26 or 28" },
+    { date: "2024-06-04", target: 5, numbers: [6, 7, 8, 9], instructions: "Solve the daily problem by using each number once to reach the target!", hint: "Four Solutions: 67 or 68 or 96 or /6" },
+    { date: "2024-06-05", target: 18, numbers: [3, 4, 5, 9], instructions: "Solve the daily problem by using each number once to reach the target!", hint: "Three Solutions: 45 or 54 or *9" },
+    { date: "2024-06-06", target: 30, numbers: [2, 3, 4, 5], instructions: "Solve the daily problem by using each number once to reach the target!", hint: "Three Solutions: 45 or 54 or /2" },
+    { date: "2024-06-07", target: 84, numbers: [1, 2, 6, 8], instructions: "Solve the daily problem by using each number once to reach the target!", hint: "Three Solutions: 81 or 86 or /2" },
+    { date: "2024-06-08", target: 2, numbers: [4, 5, 7, 9], instructions: "Solve the daily problem by using each number once to reach the target!", hint: "Three Solutions: 45 or 47 or 49" },
+    { date: "2024-06-09", target: 14, numbers: [2, 5, 6, 8], instructions: "Solve the daily problem by using each number once to reach the target!", hint: "Four Solutions: 26 or 56 or *2 or /2" },
+];
 
 var targetNumber;
 var usedNumbers = [];
 var numberButtons;
 var body = document.getElementById('body');
+var currentProblem;
 
 document.addEventListener('DOMContentLoaded', function () {
     initDailyLevel();
@@ -21,9 +21,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function initDailyLevel() {
     const today = getTodayDate();
-    const problem = dailyLevel.find(p => p.date === today) || dailyLevel[0];
+    currentProblem = dailyLevel.find(p => p.date === today) || dailyLevel[0];
     
-    displayProblem(today, problem);
+    displayProblem(today, currentProblem);
     document.getElementById('date').textContent = today;
 }
 
@@ -172,4 +172,15 @@ function selectPastProblem() {
     if (problem) {
         displayProblem(selectedDate, problem);
     }
+}
+
+function showHint() {
+    if (currentProblem && currentProblem.hint) {
+        document.getElementById('hint-display').textContent = currentProblem.hint;
+        document.getElementById('hint-popup').classList.remove('hidden');
+    }
+}
+
+function closeHintPopup() {
+    document.getElementById('hint-popup').classList.add('hidden');
 }

@@ -28,7 +28,9 @@
         <select id="pastSelect" onchange="selectPastProblem()">
             <!-- Levels will be inserted here dynamically -->
         </select>
+        <button id="hintButton" onclick="showHint()">Hint</button>
     </div>
+
     <div id="popup" class="hidden">
         <div class="popup-content">
             <h2 id="popup-message">NICE WORK!</h2>
@@ -37,6 +39,17 @@
             <button onclick="closePopup()">Admire your work</button>
         </div>
     </div>
+
+    <div id="hint-popup" class="hidden">
+        <div class="popup-content">
+            <h2>Hint</h2>
+            <p id="hint-display"></p>
+            
+            <button onclick="closeHintPopup()">Close</button>
+        </div>
+    </div>
+    
+
     <div class="navigation">
         <button onclick="window.location.href='levels.html'">Levels</button>
     </div>

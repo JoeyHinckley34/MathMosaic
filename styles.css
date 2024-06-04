@@ -35,7 +35,7 @@ h1, h2, p, div {
 .hidden {
     display: none;
 }
-.popup {
+.popup, .hint-popup {
     position: fixed;
     top: 0;
     left: 0;
