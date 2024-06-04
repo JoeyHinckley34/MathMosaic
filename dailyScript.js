@@ -184,3 +184,8 @@ function showHint() {
 function closeHintPopup() {
     document.getElementById('hint-popup').classList.add('hidden');
 }
+
+function updateBackgroundColor() {
+    body.classList.remove('correct-bg', 'incorrect-bg');
+    body.style.backgroundColor = '#ffffcc'; // Reset to soft yellow
+}
