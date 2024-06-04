@@ -3,13 +3,13 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <script src="dailyScript.js" defer></script>
+    <script src="script.js" defer></script>
 </head>
 <body id="body">
-    <h1>MathMosaic Daily</h1>
-    <p id="date"></p>
+    <h1>MathMosaic</h1>
     <p id="instructions"></p>
-    <h2 id="target">Target: 13</h2>
+    <p id="level-instructions"></p>
+    <h2 id="target">Target: 10</h2>
     <div class="equation-container">
         <div id="equation"></div>
         <div id="result"></div>
@@ -20,12 +20,12 @@
     <div class="operators">
         <button onclick="insertValue(this)">+</button>
         <button onclick="insertValue(this)">-</button>
-        <button onclick="insertValue(this)">*</button>
+        <button onclick="insertValue(this)" class="multiply">*</button>
         <button onclick="insertValue(this)">/</button>
     </div>
     <div class="equation-container">
         <button onclick="deleteLast()">Delete</button>
-        <select id="pastSelect" onchange="selectPastProblem()">
+        <select id="levelSelect" onchange="selectLevel()">
             <!-- Levels will be inserted here dynamically -->
         </select>
     </div>
@@ -33,12 +33,12 @@
         <div class="popup-content">
             <h2 id="popup-message">NICE WORK!</h2>
             <p id="solution-display"></p>
-
+            <button onclick="nextLevel()">NEXT LEVEL</button>
             <button onclick="closePopup()">Admire your work</button>
         </div>
     </div>
     <div class="navigation">
-        <button onclick="window.location.href='index.html'">Levels</button>
+        <button onclick="window.location.href='index.html'">Daily Problem</button>
     </div>
 </body>
 </html>
