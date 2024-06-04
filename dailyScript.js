@@ -12,7 +12,7 @@ var targetNumber;
 var usedNumbers = [];
 var numberButtons;
 var body = document.getElementById('body');
-var currentProblem;
+var currentProblem; // Add a variable to keep track of the current problem
 
 document.addEventListener('DOMContentLoaded', function () {
     initDailyLevel();
@@ -21,23 +21,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function initDailyLevel() {
     const today = getTodayDate();
-    currentProblem = dailyLevel.find(p => p.date === today) || dailyLevel[0];
-    
-    displayProblem(today, currentProblem);
+    const problem = dailyLevel.find(p => p.date === today) || dailyLevel[0];
+    currentProblem = problem; // Set the current problem
+    displayProblem(today, problem);
     document.getElementById('date').textContent = today;
+    displayMathMosaicNumber(today);
 }
 
 function displayProblem(date, problem) {
     usedNumbers = [];
-
+    currentProblem = problem; // Update the current problem when displaying a new one
     setTarget(problem.target);
     clearEquationAndResult();
     resetBackgroundColor();
     updateInstructions(problem.instructions);
     createDigitButtons(problem.numbers);
-
     numberButtons = document.querySelectorAll('.digits button');
     targetNumber = problem.target;
+    displayMathMosaicNumber(currentProblem.date);
+}
+
+function displayMathMosaicNumber(date) {
+    const startDate = new Date('2024-06-03');
+    const currentDate = new Date(date);
+    const dayDifference = Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
+    document.querySelector('h1').textContent = `MathMosaic Daily #${dayDifference}`;
 }
 
 function getTodayDate() {
@@ -150,6 +158,17 @@ function closePopup() {
     document.getElementById('popup').classList.add('hidden');
 }
 
+function showHint() {
+    if (currentProblem && currentProblem.hint) {
+        document.getElementById('hint-display').textContent = currentProblem.hint;
+        document.getElementById('hint-popup').classList.remove('hidden');
+    }
+}
+
+function closeHintPopup() {
+    document.getElementById('hint-popup').classList.add('hidden');
+}
+
 function populatePastProblems() {
     const today = getTodayDate();
     const pastSelect = document.getElementById('pastSelect');
@@ -168,30 +187,19 @@ function populatePastProblems() {
     pastSelect.value = today;
 }
 
-
 function selectPastProblem() {
     const pastSelect = document.getElementById('pastSelect');
     const selectedDate = pastSelect.value;
     const problem = dailyLevel.find(p => p.date === selectedDate);
     if (problem) {
+        currentProblem = problem; // Set the current problem
         displayProblem(selectedDate, problem);
         document.getElementById('date').textContent = selectedDate; // Update displayed date
     }
-}
-
-
-function showHint() {
-    if (currentProblem && currentProblem.hint) {
-        document.getElementById('hint-display').textContent = currentProblem.hint;
-        document.getElementById('hint-popup').classList.remove('hidden');
-    }
-}
-
-function closeHintPopup() {
-    document.getElementById('hint-popup').classList.add('hidden');
 }
 
 function updateBackgroundColor() {
     body.classList.remove('correct-bg', 'incorrect-bg');
     body.style.backgroundColor = '#ffffcc'; // Reset to soft yellow
 }
+
