@@ -55,9 +55,9 @@ def getAllSolutions(nums,ops,target):
         return "No Solutions"
    
 def main():
-    nums = [6, 7, 8, 9]
+    nums = [3, 4, 5, 9]
     ops = ['+', '-', '*', '/']
-    target = 105
+    target = 5
     print(getAllSolutions(nums,ops,target))
 
 if __name__ == '__main__':
