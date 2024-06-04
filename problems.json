@@ -1,0 +1,14 @@
+[
+    {
+        "date": "2024-05-31",
+        "target": 10,
+        "numbers": [1, 2, 3, 4],
+        "instructions": "Welcome to MathMosaic! The goal is to use the numbers below to create an equation that equals the target number. Use each number once. Good luck!"
+    },
+    {
+        "date": "2024-06-01",
+        "target": 322,
+        "numbers": [1, 2, 3, 4],
+        "instructions": "Combining digits like 12+34 is valid. The only rule is use each number once to reach the target number."
+    }
+]
