@@ -1,29 +1,48 @@
 var dailyLevel = [
-    { date: "06-03-2024", target: 13, numbers: [2, 4, 6, 8], instructions: "Solve the daily problem by using each number once to reach the target!" },
-    { date: "06-04-2024", target: 5, numbers: [6, 7, 8, 9], instructions: "Solve the daily problem by using each number once to reach the target!" },
-    { date: "06-05-2024", target: 18, numbers: [3, 4, 5, 9], instructions: "Solve the daily problem by using each number once to reach the target!" },
-];
-
-var currentLevel = 0;
+    { date: "2024-06-03", target: 13, numbers: [2, 4, 6, 8], instructions: "Solve the daily problem by using each number once to reach the target!" },
+    { date: "2024-06-04", target: 5, numbers: [6, 7, 8, 9], instructions: "Solve the daily problem by using each number once to reach the target!" },
+    { date: "2024-06-05", target: 18, numbers: [3, 4, 5, 9], instructions: "Solve the daily problem by using each number once to reach the target!" },
+    { date: "2024-06-06", target: 30, numbers: [2, 3, 4, 5], instructions: "Solve the daily problem by using each number once to reach the target!" },
+    { date: "2024-06-07", target: 84, numbers: [1, 2, 6, 8], instructions: "Solve the daily problem by using each number once to reach the target!" },
+    { date: "2024-06-08", target: 2, numbers: [4, 5, 7, 9], instructions: "Solve the daily problem by using each number once to reach the target!" },
+    { date: "2024-06-09", target: 14, numbers: [2, 5, 6, 8], instructions: "Solve the daily problem by using each number once to reach the target!" },
+]
+;
 
 var targetNumber;
 var usedNumbers = [];
 var numberButtons;
 var body = document.getElementById('body');
 
-function initDailyLevel(levelIndex) {
-    var level = dailyLevel[levelIndex]
-    targetNumber = level.target;
+document.addEventListener('DOMContentLoaded', function () {
+    initDailyLevel();
+    populatePastProblems();
+});
+
+function initDailyLevel() {
+    const today = getTodayDate();
+    const problem = dailyLevel.find(p => p.date === today) || dailyLevel[0];
+    
+    displayProblem(today, problem);
+    document.getElementById('date').textContent = today;
+}
+
+function displayProblem(date, problem) {
     usedNumbers = [];
 
-    setTarget(targetNumber);
+    setTarget(problem.target);
     clearEquationAndResult();
     resetBackgroundColor();
-    updateInstructions(level.instructions);
-    createDigitButtons(level.numbers);
+    updateInstructions(problem.instructions);
+    createDigitButtons(problem.numbers);
 
     numberButtons = document.querySelectorAll('.digits button');
-    updateDate();
+    targetNumber = problem.target;
+}
+
+function getTodayDate() {
+    const date = new Date();
+    return date.toISOString().split('T')[0]; // Format: YYYY-MM-DD
 }
 
 function setTarget(target) {
@@ -131,41 +150,26 @@ function closePopup() {
     document.getElementById('popup').classList.add('hidden');
 }
 
-function updateDate() {
-    var date = new Date();
-    var dateString = date.toDateString();
-    document.getElementById('date').textContent = dateString;
-}
+function populatePastProblems() {
+    const today = getTodayDate();
+    const pastSelect = document.getElementById('pastSelect');
+    pastSelect.innerHTML = '';
 
-function resetBackgroundColor() {
-    body.classList.remove('correct-bg', 'incorrect-bg');
-    body.style.backgroundColor = '#ffffcc';
-}
-
-function updateBackgroundColor() {
-    body.classList.remove('correct-bg', 'incorrect-bg');
-    body.style.backgroundColor = '#ffffcc'; // Reset to soft yellow
-}
-
-function populateLevelDropdown() {
-    var levelSelect = document.getElementById('levelSelect');
-    levelSelect.innerHTML = '';
-    dailyLevel.forEach(function(level, index) {
-        var option = document.createElement('option');
-        option.value = index;
-        option.textContent = 'MathMosaic ' + (index + 1);
-        levelSelect.appendChild(option);
+    dailyLevel.forEach(problem => {
+        if (problem.date <= today) {
+            const option = document.createElement('option');
+            option.value = problem.date;
+            option.textContent = problem.date;
+            pastSelect.appendChild(option);
+        }
     });
 }
 
-function selectLevel() {
-    var levelSelect = document.getElementById('levelSelect');
-    currentLevel = parseInt(levelSelect.value);
-    initDailyLevel(currentLevel);
+function selectPastProblem() {
+    const pastSelect = document.getElementById('pastSelect');
+    const selectedDate = pastSelect.value;
+    const problem = dailyLevel.find(p => p.date === selectedDate);
+    if (problem) {
+        displayProblem(selectedDate, problem);
+    }
 }
-// Initialize the daily level
-initDailyLevel(currentLevel);
-
-// Populate the dropdown and initialize the first level
-populateLevelDropdown();
-

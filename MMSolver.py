@@ -31,10 +31,11 @@ def getAllTargets(AEs):
     for ae in AEs:
         try:
             e = eval(ae)
-            if e in ATs:
-                ATs[e].append(ae)
-            else:
-                ATs[e] = [ae]
+            if (e - int(e)) == 0: #ONLY ROUND NUMBERS
+                if e in ATs:
+                    ATs[e].append(ae)
+                else:
+                    ATs[e] = [ae]
         except ZeroDivisionError:
             continue
             print(f"Division by zero is not allowe: {ae}")
@@ -55,7 +56,7 @@ def getAllSolutions(nums,ops,target):
         return "No Solutions"
    
 def main():
-    nums = [3, 4, 5, 9]
+    nums = [2, 5, 6, 8]
     ops = ['+', '-', '*', '/']
     target = 5
     print(getAllSolutions(nums,ops,target))
