@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="dailyScript.js" defer></script>
+</head>
+<body id="body">
+    <h1>MathMosaic Daily Problem</h1>
+    <p id="date"></p>
+    <p id="instructions"></p>
+    <h2 id="target">Target: 10</h2>
+    <div class="equation-container">
+        <div id="equation"></div>
+        <div id="result"></div>
+    </div>
+    <div class="digits" id="digits">
+        <!-- Digits will be inserted here dynamically -->
+    </div>
+    <div class="operators">
+        <button onclick="insertValue(this)">+</button>
+        <button onclick="insertValue(this)">-</button>
+        <button onclick="insertValue(this)">*</button>
+        <button onclick="insertValue(this)">/</button>
+    </div>
+    <div class="equation-container">
+        <button onclick="deleteLast()">Delete</button>
+    </div>
+    <div id="popup" class="hidden">
+        <div class="popup-content">
+            <h2 id="popup-message">NICE WORK!</h2>
+            <p id="solution-display"></p>
+            <button onclick="closePopup()">Admire your work</button>
+        </div>
+    </div>
+    <div class="navigation">
+        <button onclick="window.location.href='index.html'">Levels</button>
+    </div>
+</body>
+</html>
