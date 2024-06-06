@@ -1,5 +1,5 @@
 var dailyLevel = [
-    { date: "2024-06-03", target: 13, numbers: [2, 4, 6, 8], instructions: "Solve the daily problem by using each number once to reach the target!", hint: "Two Solutions: Start with 26 or 28" },
+    { date: "2024-06-03", target: 13, numbers: [2, 4, 6, 8], instructions: "Use each number once to reach the target!", hint: "Two Solutions: Start with 26 or 28" },
     { date: "2024-06-04", target: 5, numbers: [6, 7, 8, 9], instructions: "Solve the daily problem by using each number once to reach the target!", hint: "Four Solutions: Start with 67 or 68 or 96 or /6" },
     { date: "2024-06-05", target: 18, numbers: [3, 4, 5, 9], instructions: "Solve the daily problem by using each number once to reach the target!", hint: "Three Solutions: Start with 45 or 54 or *9" },
     { date: "2024-06-06", target: 30, numbers: [2, 3, 4, 5], instructions: "Solve the daily problem by using each number once to reach the target!", hint: "Three Solutions: Start with 45 or 54 or /2" },

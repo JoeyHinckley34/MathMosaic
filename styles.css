@@ -41,7 +41,7 @@ h1, h2, p, div {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color:rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,7 +50,7 @@ h1, h2, p, div {
     background-color: #fff;
     padding: 20px;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 100px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 }
 .popup-content button {
@@ -86,5 +86,11 @@ h1, h2, p, div {
     }
     #result {
         font-size: 20px;
+    }
+    .equation-container {
+        font-size: 20px; /* Increase size for equation container on mobile */
+    }
+    .equation-container button {
+        font-size: 18px; /* Increase size for buttons in equation container on mobile */
     }
 }
