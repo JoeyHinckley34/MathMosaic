@@ -108,20 +108,20 @@ def getAllSolutions(nums, ops, target,most=False):
 
 
 def main():
-    # nums = [2,3,6,5]
-    nums = [random.randint(1,9) for _ in range(4)]
+    nums = [2,3,4,8]
+    #nums = [random.randint(1,9) for _ in range(4)]
     ops = ['+', '-', '*', '/']
-    target = 20
+    target = 0
 
     #print(nums)
     solutions = getAllSolutions(nums, ops, target, True)
     print(nums)
 
-    # if isinstance(solutions, dict):
-    #     for key, val in solutions.items():
-    #         print(f"{key}: {val}")
-    # else:
-    #     print(solutions)
+    if isinstance(solutions, dict):
+        for key, val in solutions.items():
+            print(f"{key}: {val}")
+    else:
+        print(solutions)
 
 if __name__ == '__main__':
     main()
