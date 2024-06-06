@@ -29,10 +29,10 @@ def getAllEquations(nums, ops):
     return list(unique_equations)
 
 # Function to normalize an equation by extracting and sorting numbers and operators
-def normalize_equation(eq):
+def normalize_equation(eq,e):
     numbers = list(map(int, re.findall(r'\d+', eq)))
     operators = re.findall(r'[\+\-\*/]', eq)
-    return (tuple(sorted(numbers)), tuple(sorted(operators)))
+    return (e,tuple(sorted(numbers)), tuple(sorted(operators)))
 
 # Turns all the equations into a dictionary with keys being the evaluation of the equations
 def getAllTargets(AEs):
@@ -40,7 +40,7 @@ def getAllTargets(AEs):
     for ae in AEs:
         try:
             e = eval(ae)
-            norm = normalize_equation(ae)
+            norm = normalize_equation(ae,e)
             if norm in ATs:
                 ATs[norm].append(ae)
             else:
@@ -53,9 +53,16 @@ def getAllTargets(AEs):
             print(f"Syntax Error: Eval({ae})")
     return ATs
 
-def getAllSolutions(nums, ops, target):
+def getAllSolutions(nums, ops, target,all=False):
     AEs = getAllEquations(nums, ops)
     ATs = getAllTargets(AEs)
+
+    if all:
+        sortedATs = dict(sorted(ATs.items()))
+        for key, val in sortedATs.items():
+            print(key,val)
+
+
     target_solutions = {}
     
     for norm, eqs in ATs.items():
@@ -74,10 +81,11 @@ def getAllSolutions(nums, ops, target):
     return target_solutions if target_solutions else "No Solutions"
    
 def main():
-    nums = [5,8,3,4]
+    nums = [3,6,9,5]
     ops = ['+', '-', '*', '/']
-    target = 100
-    solutions = getAllSolutions(nums, ops, target)
+    target = 10
+    solutions = getAllSolutions(nums, ops, target, True)
+
     if isinstance(solutions, dict):
         for key, val in solutions.items():
             print(f"{key}: {val}")
