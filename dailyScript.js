@@ -169,6 +169,16 @@ function closeHintPopup() {
     document.getElementById('hint-popup').classList.add('hidden');
 }
 
+function toggleHelpMenu() {
+    var helpMenu = document.getElementById('helpMenu');
+    if (helpMenu.style.display === 'block') {
+        helpMenu.style.display = 'none';
+    } else {
+        helpMenu.style.display = 'block';
+    }
+}
+
+
 function populatePastProblems() {
     const today = getTodayDate();
     const pastSelect = document.getElementById('pastSelect');

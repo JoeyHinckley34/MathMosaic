@@ -74,9 +74,9 @@ def getAllSolutions(nums, ops, target):
     return target_solutions if target_solutions else "No Solutions"
    
 def main():
-    nums = [3, 4, 5, 9]
+    nums = [5,8,3,4]
     ops = ['+', '-', '*', '/']
-    target = 18
+    target = 100
     solutions = getAllSolutions(nums, ops, target)
     if isinstance(solutions, dict):
         for key, val in solutions.items():
