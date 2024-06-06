@@ -1,5 +1,6 @@
 import itertools
 import re
+import random
 
 # Helper function to recursively generate all possible equations
 def getAEHelper(nums, ops, eq, pos):
@@ -32,7 +33,7 @@ def getAllEquations(nums, ops):
 def normalize_equation(eq,e):
     numbers = list(map(int, re.findall(r'\d+', eq)))
     operators = re.findall(r'[\+\-\*/]', eq)
-    return (e,tuple(sorted(numbers)), tuple(sorted(operators)))
+    return (int(e),tuple(sorted(numbers)), tuple(sorted(operators)))
 
 # Turns all the equations into a dictionary with keys being the evaluation of the equations
 def getAllTargets(AEs):
@@ -54,15 +55,38 @@ def getAllTargets(AEs):
             print(f"Syntax Error: Eval({ae})")
     return ATs
 
-def getAllSolutions(nums, ops, target,all=False):
+def getMost(ATs):
+
+    sortedATs = dict(sorted(ATs.items()))
+    most = {}
+    for key, val in sortedATs.items():
+        print(key,val)
+        if key[0] > 0 and key[0] < 200:
+            if key[0] not in most:
+                most[key[0]] = []
+            most[key[0]].append([key,val])
+
+    return most
+
+def printMost(most):
+    sortedMost = sorted(most.items(), key= lambda x: len(x[1]), reverse=False) 
+
+    for v in sortedMost:
+        print("\n")
+        for x in v:
+            if isinstance(x, list):
+                for y in x:
+                    print(y)
+            else:    
+                print(x)
+
+def getAllSolutions(nums, ops, target,most=False):
     AEs = getAllEquations(nums, ops)
     ATs = getAllTargets(AEs)
 
-    if all:
-        sortedATs = dict(sorted(ATs.items()))
-        for key, val in sortedATs.items():
-            print(key,val)
-
+    if most:
+        mostATs = getMost(ATs)
+        printMost(mostATs)
 
     target_solutions = {}
     
@@ -80,18 +104,24 @@ def getAllSolutions(nums, ops, target,all=False):
                 continue
     
     return target_solutions if target_solutions else "No Solutions"
-   
+
+
+
 def main():
-    nums = [1,4,6,5]
+    # nums = [2,3,6,5]
+    nums = [random.randint(1,9) for _ in range(4)]
     ops = ['+', '-', '*', '/']
     target = 20
-    solutions = getAllSolutions(nums, ops, target, True)
 
-    if isinstance(solutions, dict):
-        for key, val in solutions.items():
-            print(f"{key}: {val}")
-    else:
-        print(solutions)
+    #print(nums)
+    solutions = getAllSolutions(nums, ops, target, True)
+    print(nums)
+
+    # if isinstance(solutions, dict):
+    #     for key, val in solutions.items():
+    #         print(f"{key}: {val}")
+    # else:
+    #     print(solutions)
 
 if __name__ == '__main__':
     main()
