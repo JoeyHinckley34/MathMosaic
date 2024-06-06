@@ -108,8 +108,9 @@ def getAllSolutions(nums, ops, target,most=False):
 
 
 def main():
-    nums = [2,3,4,8]
-    #nums = [random.randint(1,9) for _ in range(4)]
+    #nums = [1,2,6,8]
+    
+    nums = [random.randint(1,9) for _ in range(4)]
     ops = ['+', '-', '*', '/']
     target = 0
 
