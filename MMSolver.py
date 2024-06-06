@@ -41,10 +41,11 @@ def getAllTargets(AEs):
         try:
             e = eval(ae)
             norm = normalize_equation(ae,e)
-            if norm in ATs:
-                ATs[norm].append(ae)
-            else:
-                ATs[norm] = [ae]
+            if (e - int(e) == 0):
+                if norm in ATs:
+                    ATs[norm].append(ae)
+                else:
+                    ATs[norm] = [ae]
         except ZeroDivisionError:
             continue
             print(f"Division by zero is not allowed: {ae}")
@@ -81,9 +82,9 @@ def getAllSolutions(nums, ops, target,all=False):
     return target_solutions if target_solutions else "No Solutions"
    
 def main():
-    nums = [3,6,9,5]
+    nums = [1,4,6,5]
     ops = ['+', '-', '*', '/']
-    target = 10
+    target = 20
     solutions = getAllSolutions(nums, ops, target, True)
 
     if isinstance(solutions, dict):
