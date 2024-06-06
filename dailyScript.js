@@ -182,7 +182,6 @@ function populatePastProblems() {
             pastSelect.appendChild(option);
         }
     });
-
     // Set the selected option to today's date
     pastSelect.value = today;
 }
