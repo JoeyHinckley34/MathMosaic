@@ -18,6 +18,7 @@ var dailyLevel = [
     { date: "2024-06-19", target: 0, numbers: [2, 3, 4, 8], hint: "Four Solutions: Using 24 or 32"},
     { date: "2024-06-20", target: 16, numbers: [1, 7, 8, 9], hint: "Four Solutions: Using 18 or 17 or 81 or 97"},
     { date: "2024-06-21", target: 21, numbers: [1, 2, 3, 4], hint: "Five Solutions: Using 25 or 15 or 13 or 31 or 52"},
+    { date: "2024-06-22", target: 9, numbers: [5, 6, 7, 8], hint: "Four Solutions: Using 57 or 65 or 58 or 76"},
 ];
 
 var targetNumber;

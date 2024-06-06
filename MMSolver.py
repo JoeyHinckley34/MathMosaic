@@ -118,11 +118,11 @@ def main():
     solutions = getAllSolutions(nums, ops, target, True)
     print(nums)
 
-    if isinstance(solutions, dict):
-        for key, val in solutions.items():
-            print(f"{key}: {val}")
-    else:
-        print(solutions)
+    # if isinstance(solutions, dict):
+    #     for key, val in solutions.items():
+    #         print(f"{key}: {val}")
+    # else:
+    #     print(solutions)
 
 if __name__ == '__main__':
     main()
