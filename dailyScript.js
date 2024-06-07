@@ -42,9 +42,11 @@ function initDailyLevel() {
     displayMathMosaicNumber(today);
 }
 
-function displayProblem(date, problem) {
+function displayProblem(date, problem, noClear=true) {
     usedNumbers = [];
-    foundSolutions = []; // Reset found Solutions for new problem
+    if (noClear){
+        foundSolutions = []; // Reset found Solutions for new problem
+    }   
     updateFoundSolutionsDisplay(); // Update the display for found solutions
     currentProblem = problem; // Update the current problem when displaying a new one
     setTarget(problem.target);
@@ -177,6 +179,7 @@ function showPopup(solution, result) {
 
 function closePopup() {
     document.getElementById('popup').classList.add('hidden');
+
 }
 
 function showHint() {
@@ -217,13 +220,13 @@ function populatePastProblems() {
     pastSelect.value = today;
 }
 
-function selectPastProblem() {
+function selectPastProblem(noClear=true) {
     const pastSelect = document.getElementById('pastSelect');
     const selectedDate = pastSelect.value;
     const problem = dailyLevel.find(p => p.date === selectedDate);
     if (problem) {
         currentProblem = problem; // Set the current problem
-        displayProblem(selectedDate, problem);
+        displayProblem(selectedDate, problem, noClear);
         document.getElementById('date').textContent = selectedDate; // Update displayed date
     }
 }

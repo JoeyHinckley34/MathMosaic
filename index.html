@@ -26,14 +26,14 @@
     </div>
     <div class="equation-container">
         <button onclick="deleteLast()">Delete</button>
+        <button id="hintButton" onclick="showHint()">Hint</button>
+        <button onclick="selectPastProblem(false)">Clear</button>
+    </div>
+    <div class="navigation">
+        <button onclick="window.location.href='levels.html'">Levels</button>
         <select id="pastSelect" onchange="selectPastProblem()">
             <!-- Levels will be inserted here dynamically -->
         </select>
-        <button id="hintButton" onclick="showHint()">Hint</button>
-    </div>
-
-    <div class="navigation">
-        <button onclick="window.location.href='levels.html'">Levels</button>
     </div>
 
     <div id="popup" class="hidden">
@@ -41,6 +41,7 @@
             <h2 id="popup-message">NICE WORK!</h2>
             <p id="solution-display"></p>
             <button onclick="closePopup()">Admire your work</button>
+            <button onclick="closePopup()">Find more solutions</button>
         </div>
     </div>
 

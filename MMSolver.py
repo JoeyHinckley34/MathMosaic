@@ -113,11 +113,11 @@ def printSolutions(solutions):
         print(solutions)
 
 def main():
-    nums = [2,6,4,5]
+    nums = [2,3,4,5]
     
     #nums = [random.randint(1,9) for _ in range(4)]
     ops = ['+', '-', '*', '/']
-    target = 12
+    target = 30
     #print(nums)
 
     solutions = getAllSolutions(nums, ops, target, False)
