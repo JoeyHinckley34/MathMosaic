@@ -80,7 +80,7 @@ def printMost(most):
             else:    
                 print(x)
 
-def getAllSolutions(nums, ops, target,most=False):
+def getAllSolutions(nums, ops = ['+', '-', '*', '/'], target=0,most=False):
     AEs = getAllEquations(nums, ops)
     ATs = getAllTargets(AEs)
 
@@ -105,24 +105,24 @@ def getAllSolutions(nums, ops, target,most=False):
     
     return target_solutions if target_solutions else "No Solutions"
 
-
+def printSolutions(solutions):
+    if isinstance(solutions, dict):
+        for key, val in solutions.items():
+            print(f"{key}: {val}")
+    else:
+        print(solutions)
 
 def main():
-    #nums = [1,2,6,8]
+    nums = [2,6,4,5]
     
-    nums = [random.randint(1,9) for _ in range(4)]
+    #nums = [random.randint(1,9) for _ in range(4)]
     ops = ['+', '-', '*', '/']
-    target = 0
-
+    target = 12
     #print(nums)
-    solutions = getAllSolutions(nums, ops, target, True)
-    print(nums)
 
-    # if isinstance(solutions, dict):
-    #     for key, val in solutions.items():
-    #         print(f"{key}: {val}")
-    # else:
-    #     print(solutions)
+    solutions = getAllSolutions(nums, ops, target, False)
+    printSolutions(solutions)
+
 
 if __name__ == '__main__':
     main()

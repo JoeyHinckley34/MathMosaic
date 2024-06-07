@@ -135,3 +135,29 @@ h1, h2, p, div {
     cursor: pointer;
     border-radius: 4px;
 }
+
+#found-solutions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#found-solutions ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#found-solutions li {
+    display: inline-block;
+    margin: 5px;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#found-solutions h2 {
+    margin-bottom: 10px;
+}
+
+#found-solutions p {
+    margin-bottom: 10px;
+}

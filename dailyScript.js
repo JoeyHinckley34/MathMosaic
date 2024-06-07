@@ -1,24 +1,24 @@
 var dailyLevel = [
-    { date: "2024-06-03", target: 13, numbers: [2, 4, 6, 8], hint: "Two Solutions: Using 26 or 28"},
-    { date: "2024-06-04", target: 5, numbers: [6, 7, 8, 9], hint: "Four Solutions: Using 67 or 68 or 96 or /6"},
-    { date: "2024-06-05", target: 18, numbers: [3, 4, 5, 9],  hint: "Three Solutions: Using 45 or 54 or *9"},
-    { date: "2024-06-06", target: 30, numbers: [2, 3, 4, 5],  hint: "Three Solutions: Using 45 or 54 or /2"},
-    { date: "2024-06-07", target: 12, numbers: [2, 4, 5, 6], hint: "Seven Solutions: Using 64 or 56 or 42 or /6 or /2 or *4 or *2"},
-    { date: "2024-06-08", target: 2, numbers: [4, 5, 7, 9],  hint: "Three Solutions: Using 45 or 47 or 49"},
-    { date: "2024-06-09", target: 14, numbers: [2, 5, 6, 8], hint: "Four Solutions: Using 26 or 56 or *2 or /2"},
-    { date: "2024-06-10", target: 18, numbers: [3, 5, 6, 9], hint: "Four Solutions: Using 63 or 69 or *5"},
-    { date: "2024-06-11", target: 7, numbers: [1, 2, 4, 7], hint: "Four Solutions: Using 21 or 24 or 42"},
-    { date: "2024-06-12", target: 2, numbers: [4, 5, 6, 8], hint: "Four Solutions: Using 46 or 57 or 64 or *6"},
-    { date: "2024-06-13", target: 23, numbers: [5, 7, 8, 9], hint: "Two Solutions: Using 98 or *9"},
-    { date: "2024-06-14", target: 20, numbers: [3, 6, 7, 8], hint: "Two Solutions: Using 78 or 36"},
-    { date: "2024-06-15", target: 14, numbers: [1, 5, 7, 8], hint: "Three Solutions: Using 17 or 15 or 85"},
-    { date: "2024-06-16", target: 45, numbers: [1, 3, 5, 9], hint: "Six Solutions: Using 39 or 35 or 53 or 15 or 51 or 31"},
-    { date: "2024-06-17", target: 17, numbers: [4, 5, 6, 8], hint: "Three Solutions: Using 48 or 54 or /4"},
-    { date: "2024-06-18", target: 11, numbers: [4, 5, 6, 7], hint: "Four Solutions: Using 46 or 57 or 64 or *6"},
-    { date: "2024-06-19", target: 0, numbers: [2, 3, 4, 8], hint: "Four Solutions: Using 24 or 32"},
-    { date: "2024-06-20", target: 16, numbers: [1, 7, 8, 9], hint: "Four Solutions: Using 18 or 17 or 81 or 97"},
-    { date: "2024-06-21", target: 21, numbers: [1, 2, 3, 4], hint: "Five Solutions: Using 25 or 15 or 13 or 31 or 52"},
-    { date: "2024-06-22", target: 9, numbers: [5, 6, 7, 8], hint: "Four Solutions: Using 57 or 65 or 58 or 76"},
+    { date: "2024-06-03", target: 13, numbers: [2, 4, 6, 8], solutions: 2, hint: "26 or 28"},
+    { date: "2024-06-04", target: 5, numbers: [6, 7, 8, 9], solutions: 4, hint: "67 or 68 or 96 or /6"},
+    { date: "2024-06-05", target: 18, numbers: [3, 4, 5, 9],  solutions: 3, hint: "45 or 54 or *9"},
+    { date: "2024-06-06", target: 30, numbers: [2, 3, 4, 5],  solutions: 3, hint: "45 or 54 or /2"},
+    { date: "2024-06-07", target: 12, numbers: [2, 4, 5, 6], solutions: 7, hint: "64 or 56 or 42 or /6 or /2 or *4 or *2"},
+    { date: "2024-06-08", target: 2, numbers: [4, 5, 7, 9],  solutions: 3, hint: "45 or 47 or 49"},
+    { date: "2024-06-09", target: 14, numbers: [2, 5, 6, 8], solutions: 4, hint: "26 or 56 or *2 or /2"},
+    { date: "2024-06-10", target: 18, numbers: [3, 5, 6, 9], solutions: 4, hint: "63 or 69 or *5"},
+    { date: "2024-06-11", target: 7, numbers: [1, 2, 4, 7], solutions: 4, hint: "21 or 24 or 42"},
+    { date: "2024-06-12", target: 2, numbers: [4, 5, 6, 8], solutions: 4, hint: "46 or 57 or 64 or *6"},
+    { date: "2024-06-13", target: 23, numbers: [5, 7, 8, 9], solutions: 2, hint: "98 or *9"},
+    { date: "2024-06-14", target: 20, numbers: [3, 6, 7, 8], solutions: 2, hint: "78 or 36"},
+    { date: "2024-06-15", target: 14, numbers: [1, 5, 7, 8], solutions: 3, hint: "17 or 15 or 85"},
+    { date: "2024-06-16", target: 45, numbers: [1, 3, 5, 9], solutions: 6, hint: "39 or 35 or 53 or 15 or 51 or 31"},
+    { date: "2024-06-17", target: 17, numbers: [4, 5, 6, 8], solutions: 3, hint: "48 or 54 or /4"},
+    { date: "2024-06-18", target: 11, numbers: [4, 5, 6, 7], solutions: 4, hint: "46 or 57 or 64 or *6"},
+    { date: "2024-06-19", target: 0, numbers: [2, 3, 4, 8], solutions: 4, hint: "24 or 32"},
+    { date: "2024-06-20", target: 16, numbers: [1, 7, 8, 9], solutions: 4, hint: "18 or 17 or 81 or 97"},
+    { date: "2024-06-21", target: 21, numbers: [1, 2, 3, 4], solutions: 5, hint: "25 or 15 or 13 or 31 or 52"},
+    { date: "2024-06-22", target: 9, numbers: [5, 6, 7, 8], solutions: 5, hint: "57 or 65 or 58 or 76"},
 ];
 
 var targetNumber;
@@ -26,6 +26,7 @@ var usedNumbers = [];
 var numberButtons;
 var body = document.getElementById('body');
 var currentProblem; // Add a variable to keep track of the current problem
+var foundSolutions = []; // Track found solutions
 
 document.addEventListener('DOMContentLoaded', function () {
     initDailyLevel();
@@ -43,8 +44,11 @@ function initDailyLevel() {
 
 function displayProblem(date, problem) {
     usedNumbers = [];
+    foundSolutions = []; // Reset found Solutions for new problem
+    updateFoundSolutionsDisplay(); // Update the display for found solutions
     currentProblem = problem; // Update the current problem when displaying a new one
     setTarget(problem.target);
+    setTotalSolutionsCount(problem.solutions); // Set total solutions count
     clearEquationAndResult();
     resetBackgroundColor();
     updateInstructions("Use each number once to reach the target!"); //fix later?
@@ -155,6 +159,10 @@ function displayResult(result, correct, equation) {
     if (correct) {
         body.classList.remove('incorrect-bg');
         body.classList.add('correct-bg');
+        if (!foundSolutions.includes(equation)){
+            foundSolutions.push(equation)
+            updateFoundSolutionsDisplay()
+        }
         showPopup(equation, result);
     } else {
         body.classList.remove('correct-bg');
@@ -225,3 +233,19 @@ function updateBackgroundColor() {
     body.style.backgroundColor = '#ffffcc'; // Reset to soft yellow
 }
 
+function updateFoundSolutionsDisplay() {
+    const solutionsList = document.getElementById('solutions-list');
+    const totalSolutions = document.getElementById('total-solutions');
+    solutionsList.innerHTML = '';
+    foundSolutions.forEach(solution => {
+        const listItem = document.createElement('li');
+        listItem.textContent = solution;
+        solutionsList.appendChild(listItem);
+    });
+    totalSolutions.textContent = foundSolutions.length;
+}
+
+function setTotalSolutionsCount(total) {
+    const totalSolutionsCount = document.getElementById('total-solutions-count');
+    totalSolutionsCount.textContent = total;
+}
