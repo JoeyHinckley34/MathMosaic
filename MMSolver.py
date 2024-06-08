@@ -113,15 +113,15 @@ def printSolutions(solutions):
         print(solutions)
 
 def main():
-    nums = [2,3,4,5]
+    nums = [4,5,7,9]
     
     #nums = [random.randint(1,9) for _ in range(4)]
     ops = ['+', '-', '*', '/']
     target = 30
     #print(nums)
 
-    solutions = getAllSolutions(nums, ops, target, False)
-    printSolutions(solutions)
+    solutions = getAllSolutions(nums, ops, target, True)
+    #printSolutions(solutions)
 
 
 if __name__ == '__main__':

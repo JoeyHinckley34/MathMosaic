@@ -38,7 +38,7 @@ function initDailyLevel() {
     const problem = dailyLevel.find(p => p.date === today) || dailyLevel[0];
     currentProblem = problem; // Set the current problem
     displayProblem(today, problem);
-    document.getElementById('date').textContent = today;
+    //document.getElementById('date').textContent = today;
     displayMathMosaicNumber(today);
 }
 
@@ -227,7 +227,7 @@ function selectPastProblem(noClear=true) {
     if (problem) {
         currentProblem = problem; // Set the current problem
         displayProblem(selectedDate, problem, noClear);
-        document.getElementById('date').textContent = selectedDate; // Update displayed date
+        //document.getElementById('date').textContent = selectedDate; // Update displayed date
     }
 }
 
