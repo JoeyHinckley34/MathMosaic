@@ -35,3 +35,6 @@
     { date: "2024-06-08", target: 2, numbers: [4, 5, 7, 9], instructions: "Solve the daily problem by using each number once to reach the target!", hint: "Three Solutions: 45 or 47 or 49" },
     { date: "2024-06-09", target: 14, numbers: [2, 5, 6, 8], instructions: "Solve the daily problem by using each number once to reach the target!", hint: "Four Solutions: 26 or 56 or *2 or /2" },
 ];
+
+
+1,2,8,9 -> 11

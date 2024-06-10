@@ -61,7 +61,7 @@ def getMost(ATs):
     most = {}
     for key, val in sortedATs.items():
         print(key,val)
-        if key[0] > 0 and key[0] < 200:
+        if key[0] > 0 and key[0] < 50:
             if key[0] not in most:
                 most[key[0]] = []
             most[key[0]].append([key,val])
@@ -75,6 +75,7 @@ def printMost(most):
         print("\n")
         for x in v:
             if isinstance(x, list):
+                print(f"# of Solutions: {len(x)}")
                 for y in x:
                     print(y)
             else:    
@@ -113,16 +114,14 @@ def printSolutions(solutions):
         print(solutions)
 
 def main():
-    nums = [4,5,7,9]
-    
-    #nums = [random.randint(1,9) for _ in range(4)]
+    nums = [1,2,4,7]
+    #nums = random.sample(range(2, 10), 4)
     ops = ['+', '-', '*', '/']
-    target = 30
-    #print(nums)
+    target = 7
 
     solutions = getAllSolutions(nums, ops, target, True)
     #printSolutions(solutions)
-
+    print(f"NUMS: {nums}")
 
 if __name__ == '__main__':
     main()
