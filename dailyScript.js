@@ -8,7 +8,7 @@ var dailyLevel = [
     { date: "2024-06-09", target: 14, numbers: [2, 5, 6, 8], solutions: 4, hint: "26 or 56 or *2 or /2"},
     { date: "2024-06-10", target: 18, numbers: [3, 5, 6, 9], solutions: 4, hint: "63 or 69 or *5(2)"},
     { date: "2024-06-11", target: 7, numbers: [1, 2, 4, 7], solutions: 4, hint: "21(2) or 24 or 42"},
-    { date: "2024-06-12", target: 3, numbers: [4, 5, 6, 8], solutions: 6, hint: "45 or 64 or 49 or 56 or /4 or -4"},
+    { date: "2024-06-12", target: 3, numbers: [4, 5, 6, 8], solutions: 6, hint: "45 or 64 or 48 or 56 or /4 or -4"},
     { date: "2024-06-13", target: 23, numbers: [5, 7, 8, 9], solutions: 2, hint: "98 or *9"},
     { date: "2024-06-14", target: 20, numbers: [3, 6, 7, 8], solutions: 2, hint: "78 or 36"},
     { date: "2024-06-15", target: 14, numbers: [1, 5, 7, 8], solutions: 3, hint: "17 or 15 or 85"},

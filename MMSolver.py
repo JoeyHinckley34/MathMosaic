@@ -114,13 +114,13 @@ def printSolutions(solutions):
         print(solutions)
 
 def main():
-    nums = [4,5,6,8]
+    nums = [5,7,8,9]
     #nums = random.sample(range(2, 10), 4)
     ops = ['+', '-', '*', '/']
     target = 2
 
     solutions = getAllSolutions(nums, ops, target, True)
-    printSolutions(solutions)
+    #printSolutions(solutions)
     print(f"NUMS: {nums}")
 
 if __name__ == '__main__':
