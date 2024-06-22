@@ -1,6 +1,7 @@
 import itertools
 import re
 import random
+from datetime import datetime, timedelta
 
 # Helper function to recursively generate all possible equations
 def getAEHelper(nums, ops, eq, pos):
@@ -62,33 +63,56 @@ def getMost(ATs):
     for key, val in sortedATs.items():
 
         #print(key,val,"GETMOST")
-        if key[0] > 0 and key[0] < 50:
+        if key[0] > 0 and key[0] < 30:
             if key[0] not in most:
                 most[key[0]] = []
             most[key[0]].append([key,val])
 
     return most
 
-def printMost(most):
+def getHints(v):
+    hint = ''
+    for x in v[1]:
+        if max(x[0][1]) >= 10:
+            hint += str(max(x[0][1]))
+        else:
+            hint += x[1][0][-2:]
+        hint += " or "
+    return hint[:-4]
+
+def printMost(most,date,nums,oneSolution):
     sortedMost = sorted(most.items(), key= lambda x: len(x[1]), reverse=False) 
 
-    for v in sortedMost:
-        print("\n")
-        for x in v:
-            if isinstance(x, list):
-                print(f"# of Solutions: {len(x)}")
-                for y in x:
-                    print(y)
-            else:    
-                print(x)
+    if(oneSolution):
+        v = sortedMost[-random.randint(1,4)]
+        # for x in v:
+        #     if isinstance(x, list):
+        #         print(f"# of Solutions: {len(x)}")
+        #         for y in x:
+        #             print(y)
+        #     else:    
+        #         print(x)
+        print('{ date: "',date,'", target: ',v[0],', numbers: ', sorted(nums),', solutions: ',len(v[1]),', hint: "',getHints(v),'" },',sep='')
 
-def getAllSolutions(nums, ops = ['+', '-', '*', '/'], target=0, most=False):
+    else:
+        for v in sortedMost:
+            print("\n")
+            for x in v:
+                if isinstance(x, list):
+                    print(f"# of Solutions: {len(x)}")
+                    for y in x:
+                        print(y)
+                else:    
+                    print(x)
+            print('\n{ date: "',date,'", target: ',v[0],', numbers: ', nums,', solutions: ',len(v[1]),', hint: "',getHints(v),'" },\n\n',sep='')
+
+def getAllSolutions(date, nums, ops = ['+', '-', '*', '/'], target=0, most=False, oneSolution = False):
     AEs = getAllEquations(nums, ops)
     ATs = getAllTargets(AEs)
 
     if most:
         mostATs = getMost(ATs)
-        printMost(mostATs)
+        printMost(mostATs,date,nums,oneSolution)
 
     target_solutions = {}
     
@@ -114,16 +138,40 @@ def printSolutions(solutions):
     else:
         print(solutions)
 
-def main():
-    #nums = [5,6,7,8]
-    nums = random.sample(range(2, 10), 4)
-    ops = ['+', '-', '*', '/']
-    target = 9
-    allSolutions = True
+def generate_dates(start_date: str, num_days: int) -> list:
+    """
+    Generate a list of dates starting from `start_date` for `num_days`.
 
-    solutions = getAllSolutions(nums, ops, target, allSolutions)
-    #printSolutions(solutions)
-    print(f"NUMS: {nums}")
+    Args:
+    start_date (str): The starting date in the format 'YYYY-MM-DD'.
+    num_days (int): The number of days for which to generate dates.
+
+    Returns:
+    list: A list of dates in the format 'YYYY-MM-DD'.
+    """
+    start_date_obj = datetime.strptime(start_date, '%Y-%m-%d')
+    date_list = [(start_date_obj + timedelta(days=i)).strftime('%Y-%m-%d') for i in range(num_days)]
+    return date_list
+
+
+def main():
+
+
+    # Example usage
+    start_date = '2024-06-26'
+    num_days = 30
+    dates = generate_dates(start_date, num_days)
+    for d in dates:
+        #nums = [5,6,7,8]
+        nums = random.sample(range(2, 10), 4)
+        ops = ['+', '-', '*', '/']
+        target = 0
+        printSolutions = True
+        oneSolution = True
+
+        solutions = getAllSolutions(d, nums, ops, target, printSolutions, oneSolution)
+        #printSolutions(solutions)
+        #print(f"NUMS: {nums}")
 
 if __name__ == '__main__':
     main()
