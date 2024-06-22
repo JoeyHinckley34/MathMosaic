@@ -60,7 +60,8 @@ def getMost(ATs):
     sortedATs = dict(sorted(ATs.items()))
     most = {}
     for key, val in sortedATs.items():
-        print(key,val)
+
+        #print(key,val,"GETMOST")
         if key[0] > 0 and key[0] < 50:
             if key[0] not in most:
                 most[key[0]] = []
@@ -81,7 +82,7 @@ def printMost(most):
             else:    
                 print(x)
 
-def getAllSolutions(nums, ops = ['+', '-', '*', '/'], target=0,most=False):
+def getAllSolutions(nums, ops = ['+', '-', '*', '/'], target=0, most=False):
     AEs = getAllEquations(nums, ops)
     ATs = getAllTargets(AEs)
 
@@ -114,13 +115,14 @@ def printSolutions(solutions):
         print(solutions)
 
 def main():
-    nums = [5,7,8,9]
+    nums = [5,6,7,8]
     #nums = random.sample(range(2, 10), 4)
     ops = ['+', '-', '*', '/']
-    target = 2
+    target = 9
 
-    solutions = getAllSolutions(nums, ops, target, True)
-    #printSolutions(solutions)
+
+    solutions = getAllSolutions(nums, ops, target, False)
+    printSolutions(solutions)
     print(f"NUMS: {nums}")
 
 if __name__ == '__main__':
