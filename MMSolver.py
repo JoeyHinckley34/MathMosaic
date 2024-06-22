@@ -115,14 +115,14 @@ def printSolutions(solutions):
         print(solutions)
 
 def main():
-    nums = [5,6,7,8]
-    #nums = random.sample(range(2, 10), 4)
+    #nums = [5,6,7,8]
+    nums = random.sample(range(2, 10), 4)
     ops = ['+', '-', '*', '/']
     target = 9
+    allSolutions = True
 
-
-    solutions = getAllSolutions(nums, ops, target, False)
-    printSolutions(solutions)
+    solutions = getAllSolutions(nums, ops, target, allSolutions)
+    #printSolutions(solutions)
     print(f"NUMS: {nums}")
 
 if __name__ == '__main__':
