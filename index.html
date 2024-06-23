@@ -19,7 +19,6 @@
         <!-- Digits will be inserted here dynamically -->
     </div>
     <div class="operators">
-
         <button onclick="insertValue(this)">+</button>
         <button onclick="insertValue(this)">-</button>
         <button onclick="insertValue(this)">*</button>
@@ -31,7 +30,7 @@
         <button onclick="selectPastProblem(false)">Clear</button>
     </div>
     <div class="navigation">
-        <button onclick="window.location.href='levels.html'">Levels</button>
+        <button onclick="selectRandomProblem()">Random Level</button>
         <select id="pastSelect" onchange="selectPastProblem()">
             <!-- Levels will be inserted here dynamically -->
         </select>

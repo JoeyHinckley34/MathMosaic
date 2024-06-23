@@ -24,6 +24,7 @@ async function initializeApp() {
     await loadDailyLevel();
     initDailyLevel();
     populatePastProblems();
+    //toggleHelpMenu()
 }
 
 // Event listener to ensure the DOM is fully loaded before running the script
@@ -228,6 +229,17 @@ function selectPastProblem(noClear=true) {
         //document.getElementById('date').textContent = selectedDate; // Update displayed date
     }
 }
+
+function selectRandomProblem(noClear=true) {
+    const today = getTodayDate();
+    let randomLevel = dailyLevel[Math.floor(Math.random() * dailyLevel.length)]
+    //Make sure random level has been already played
+    while (randomLevel.date > today) {
+        randomLevel = dailyLevel[Math.floor(Math.random() * dailyLevel.length)]
+    }
+    displayProblem(randomLevel.date, randomLevel, noClear);
+}
+
 
 function updateBackgroundColor() {
     body.classList.remove('correct-bg', 'incorrect-bg');
