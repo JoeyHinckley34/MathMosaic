@@ -232,12 +232,17 @@ function selectPastProblem(noClear=true) {
 
 function selectRandomProblem(noClear=true) {
     const today = getTodayDate();
-    let randomLevel = dailyLevel[Math.floor(Math.random() * dailyLevel.length)]
-    //Make sure random level has been already played
+    let randomLevel = dailyLevel[Math.floor(Math.random() * dailyLevel.length)];
+    // Make sure random level has been already played
     while (randomLevel.date > today) {
-        randomLevel = dailyLevel[Math.floor(Math.random() * dailyLevel.length)]
+        randomLevel = dailyLevel[Math.floor(Math.random() * dailyLevel.length)];
     }
+    currentProblem = randomLevel;
     displayProblem(randomLevel.date, randomLevel, noClear);
+    
+    // Update the past problems date
+    const pastSelect = document.getElementById('pastSelect');
+    pastSelect.value = randomLevel.date;
 }
 
 
