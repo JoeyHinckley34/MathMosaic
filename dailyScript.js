@@ -1,13 +1,13 @@
-
-
+// Global variables
 var targetNumber;
 var usedNumbers = [];
 var numberButtons;
 var body = document.getElementById('body');
-var currentProblem; // Add a variable to keep track of the current problem
+var currentProblem; // Variable to keep track of the current problem
 var foundSolutions = []; // Track found solutions
 var dailyLevel;
 
+// Load daily level data from JSON file
 async function loadDailyLevel() {
     try {
         const response = await fetch('levels.json');
@@ -21,7 +21,7 @@ async function loadDailyLevel() {
     }
 }
 
-// Initialize daily level data and then call other functions
+// Initialize the app by loading daily level data and calling other functions
 async function initializeApp() {
     await loadDailyLevel();
     initDailyLevel();
@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initializeApp();
 });
 
+// Initialize the daily level for today
 function initDailyLevel() {
     const today = getTodayDate();
     const problem = dailyLevel.find(p => p.date === today) || dailyLevel[0];
@@ -43,6 +44,7 @@ function initDailyLevel() {
     displayMathMosaicNumber(today);
 }
 
+// Display the problem for the given date
 function displayProblem(date, problem, noClear=true) {
     usedNumbers = [];
     if (noClear){
@@ -61,6 +63,7 @@ function displayProblem(date, problem, noClear=true) {
     displayMathMosaicNumber(currentProblem.date);
 }
 
+// Display the MathMosaic number based on the date
 function displayMathMosaicNumber(date) {
     const startDate = new Date('2024-06-03');
     const currentDate = new Date(date);
@@ -68,29 +71,35 @@ function displayMathMosaicNumber(date) {
     document.querySelector('h1').textContent = `MathMosaic Daily #${dayDifference}`;
 }
 
+// Get today's date in YYYY-MM-DD format
 function getTodayDate() {
     const date = new Date();
     return date.toISOString().split('T')[0]; // Format: YYYY-MM-DD
 }
 
+// Set the target number in the UI
 function setTarget(target) {
     document.getElementById('target').textContent = 'Target: ' + target;
 }
 
+// Clear the equation and result display
 function clearEquationAndResult() {
     document.getElementById('equation').textContent = '';
     document.getElementById('result').textContent = '';
 }
 
+// Reset the background color to default
 function resetBackgroundColor() {
     body.classList.remove('correct-bg', 'incorrect-bg');
     body.style.backgroundColor = '#ffffcc';
 }
 
+// Update the instructions in the UI
 function updateInstructions(instructions) {
     document.getElementById('instructions').textContent = instructions;
 }
 
+// Create digit buttons for the given numbers
 function createDigitButtons(numbers) {
     var digitsContainer = document.getElementById('digits');
     digitsContainer.innerHTML = '';
@@ -102,6 +111,7 @@ function createDigitButtons(numbers) {
     });
 }
 
+// Insert the value of the clicked button into the equation
 function insertValue(button) {
     var equation = document.getElementById('equation');
     var value = button.textContent;
@@ -115,6 +125,7 @@ function insertValue(button) {
     }
 }
 
+// Delete the last character from the equation
 function deleteLast() {
     var equation = document.getElementById('equation');
     var resultDisplay = document.getElementById('result');
@@ -134,6 +145,7 @@ function deleteLast() {
     updateBackgroundColor();
 }
 
+// Check if the calculation can be performed
 function checkForCalculation() {
     if (usedNumbers.length === numberButtons.length) {
         calculate();
@@ -142,6 +154,7 @@ function checkForCalculation() {
     }
 }
 
+// Perform the calculation and display the result
 function calculate() {
     var equation = document.getElementById('equation').textContent;
     try {
@@ -156,6 +169,7 @@ function calculate() {
     }
 }
 
+// Display the result of the calculation
 function displayResult(result, correct, equation) {
     var resultDisplay = document.getElementById('result');
     resultDisplay.textContent = result;
@@ -173,16 +187,18 @@ function displayResult(result, correct, equation) {
     }
 }
 
+// Show a popup with the solution
 function showPopup(solution, result) {
     document.getElementById('solution-display').textContent = `Solution: ${solution} = ${result}`;
     document.getElementById('popup').classList.remove('hidden');
 }
 
+// Close the solution popup
 function closePopup() {
     document.getElementById('popup').classList.add('hidden');
-
 }
 
+// Show a hint for the current problem
 function showHint() {
     if (currentProblem && currentProblem.hint) {
         document.getElementById('hint-display').textContent = currentProblem.hint;
@@ -190,10 +206,12 @@ function showHint() {
     }
 }
 
+// Close the hint popup
 function closeHintPopup() {
     document.getElementById('hint-popup').classList.add('hidden');
 }
 
+// Toggle the help menu
 function toggleHelpMenu() {
     var helpMenu = document.getElementById('helpMenu');
     if (helpMenu.style.display === 'block') {
@@ -203,7 +221,7 @@ function toggleHelpMenu() {
     }
 }
 
-
+// Populate the past problems select menu
 function populatePastProblems() {
     const today = getTodayDate();
     const pastSelect = document.getElementById('pastSelect');
@@ -221,6 +239,7 @@ function populatePastProblems() {
     pastSelect.value = today;
 }
 
+// Select a past problem from the menu
 function selectPastProblem(noClear=true) {
     const pastSelect = document.getElementById('pastSelect');
     const selectedDate = pastSelect.value;
@@ -232,6 +251,7 @@ function selectPastProblem(noClear=true) {
     }
 }
 
+// Select a random problem from the past
 function selectRandomProblem(noClear=true) {
     const today = getTodayDate();
     let randomLevel = dailyLevel[Math.floor(Math.random() * dailyLevel.length)];
@@ -247,12 +267,13 @@ function selectRandomProblem(noClear=true) {
     pastSelect.value = randomLevel.date;
 }
 
-
+// Update the background color based on the current state
 function updateBackgroundColor() {
     body.classList.remove('correct-bg', 'incorrect-bg');
     body.style.backgroundColor = '#ffffcc'; // Reset to soft yellow
 }
 
+// Update the display of found solutions
 function updateFoundSolutionsDisplay() {
     const solutionsList = document.getElementById('solutions-list');
     const totalSolutions = document.getElementById('total-solutions');
@@ -265,11 +286,8 @@ function updateFoundSolutionsDisplay() {
     totalSolutions.textContent = foundSolutions.length;
 }
 
+// Set the total solutions count
 function setTotalSolutionsCount(total) {
     const totalSolutionsCount = document.getElementById('total-solutions-count');
     totalSolutionsCount.textContent = total;
 }
-
-
-
-
