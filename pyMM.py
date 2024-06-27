@@ -12,19 +12,32 @@ class MathMosaic:
     def find_solutions(self):
         solutions = {}
         for perm in itertools.permutations(self.numbers):
-            for concat_pattern in self.generate_concat_patterns(len(perm)):
-                concatenated_numbers = self.apply_concat_pattern(perm, concat_pattern)
-                for ops in itertools.product(self.operators, repeat=len(concatenated_numbers)-1):
-                    expression = [str(concatenated_numbers[0])]
-                    for num, op in zip(concatenated_numbers[1:], ops):
-                        expression.append(self.operator_symbols[self.operators.index(op)])
-                        expression.append(str(num))
-                    if self.evaluate_expression(expression) == self.target:
-                        key = (tuple(sorted(concatenated_numbers)), tuple(sorted(self.operator_symbols[self.operators.index(op)] for op in ops)))
-                        if key not in solutions:
-                            solutions[key] = []
-                        solutions[key].append("".join(expression))
+            self.process_permutation(perm, solutions)
         return solutions
+
+    def process_permutation(self, perm, solutions):
+        for concat_pattern in self.generate_concat_patterns(len(perm)):
+            concatenated_numbers = self.apply_concat_pattern(perm, concat_pattern)
+            self.process_concatenated_numbers(concatenated_numbers, solutions)
+
+    def process_concatenated_numbers(self, concatenated_numbers, solutions):
+        for ops in itertools.product(self.operators, repeat=len(concatenated_numbers)-1):
+            expression = self.build_expression(concatenated_numbers, ops)
+            if self.evaluate_expression(expression) == self.target:
+                self.add_solution(concatenated_numbers, ops, expression, solutions)
+
+    def build_expression(self, concatenated_numbers, ops):
+        expression = [str(concatenated_numbers[0])]
+        for num, op in zip(concatenated_numbers[1:], ops):
+            expression.append(self.operator_symbols[self.operators.index(op)])
+            expression.append(str(num))
+        return expression
+
+    def add_solution(self, concatenated_numbers, ops, expression, solutions):
+        key = (tuple(sorted(concatenated_numbers)), tuple(sorted(self.operator_symbols[self.operators.index(op)] for op in ops)))
+        if key not in solutions:
+            solutions[key] = []
+        solutions[key].append("".join(expression))
 
     def generate_concat_patterns(self, length):
         return itertools.product([True, False], repeat=length-1)
@@ -64,3 +77,4 @@ if __name__ == "__main__":
         for solution in value:
             print(f"  {solution}",end ="\t")
         print()
+

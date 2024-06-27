@@ -1,3 +1,5 @@
+
+
 var targetNumber;
 var usedNumbers = [];
 var numberButtons;
@@ -267,3 +269,7 @@ function setTotalSolutionsCount(total) {
     const totalSolutionsCount = document.getElementById('total-solutions-count');
     totalSolutionsCount.textContent = total;
 }
+
+
+
+

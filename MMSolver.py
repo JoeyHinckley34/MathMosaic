@@ -31,10 +31,10 @@ def getAllEquations(nums, ops):
     return list(unique_equations)
 
 # Function to normalize an equation by extracting and sorting numbers and operators
-def normalize_equation(eq,e):
+def normalize_equation(eq, e):
     numbers = list(map(int, re.findall(r'\d+', eq)))
     operators = re.findall(r'[\+\-\*/]', eq)
-    return (int(e),tuple(sorted(numbers)), tuple(sorted(operators)))
+    return (int(e), tuple(sorted(numbers)), tuple(sorted(operators)))
 
 # Turns all the equations into a dictionary with keys being the evaluation of the equations
 def getAllTargets(AEs):
@@ -42,8 +42,8 @@ def getAllTargets(AEs):
     for ae in AEs:
         try:
             e = eval(ae)
-            norm = normalize_equation(ae,e)
-            if (e - int(e) == 0):
+            norm = normalize_equation(ae, e)
+            if (e - int(e) == 0):  # Check if the result is an integer
                 if norm in ATs:
                     ATs[norm].append(ae)
                 else:
@@ -56,20 +56,18 @@ def getAllTargets(AEs):
             print(f"Syntax Error: Eval({ae})")
     return ATs
 
+# Function to get the most frequent target values within a specific range
 def getMost(ATs):
-
     sortedATs = dict(sorted(ATs.items()))
     most = {}
     for key, val in sortedATs.items():
-
-        #print(key,val,"GETMOST")
         if key[0] > 0 and key[0] < 30:
             if key[0] not in most:
                 most[key[0]] = []
-            most[key[0]].append([key,val])
-
+            most[key[0]].append([key, val])
     return most
 
+# Function to generate hints for the solutions
 def getHints(v):
     hint = ''
     for x in v[1]:
@@ -80,20 +78,12 @@ def getHints(v):
         hint += " or "
     return hint[:-4]
 
-def printMost(most,date,nums,oneSolution):
-    sortedMost = sorted(most.items(), key= lambda x: len(x[1]), reverse=False) 
-
-    if(oneSolution):
-        v = sortedMost[-random.randint(1,4)]
-        # for x in v:
-        #     if isinstance(x, list):
-        #         print(f"# of Solutions: {len(x)}")
-        #         for y in x:
-        #             print(y)
-        #     else:    
-        #         print(x)
-        print('{ date: "',date,'", target: ',v[0],', numbers: ', sorted(nums),', solutions: ',len(v[1]),', hint: "',getHints(v),'" },',sep='')
-
+# Function to print the most frequent target values and their solutions
+def printMost(most, date, nums, oneSolution):
+    sortedMost = sorted(most.items(), key=lambda x: len(x[1]), reverse=False)
+    if oneSolution:
+        v = sortedMost[-random.randint(1, 4)]
+        print('{ date: "', date, '", target: ', v[0], ', numbers: ', sorted(nums), ', solutions: ', len(v[1]), ', hint: "', getHints(v), '" },', sep='')
     else:
         for v in sortedMost:
             print("\n")
@@ -102,20 +92,18 @@ def printMost(most,date,nums,oneSolution):
                     print(f"# of Solutions: {len(x)}")
                     for y in x:
                         print(y)
-                else:    
+                else:
                     print(x)
-            print('\n{ date: "',date,'", target: ',v[0],', numbers: ', nums,', solutions: ',len(v[1]),', hint: "',getHints(v),'" },\n\n',sep='')
+            print('\n{ date: "', date, '", target: ', v[0], ', numbers: ', nums, ', solutions: ', len(v[1]), ', hint: "', getHints(v), '" },\n\n', sep='')
 
-def getAllSolutions(date, nums, ops = ['+', '-', '*', '/'], target=0, most=False, oneSolution = False):
+# Main function to get all solutions for a given date, numbers, and operators
+def getAllSolutions(date, nums, ops=['+', '-', '*', '/'], target=0, most=False, oneSolution=False):
     AEs = getAllEquations(nums, ops)
     ATs = getAllTargets(AEs)
-
     if most:
         mostATs = getMost(ATs)
-        printMost(mostATs,date,nums,oneSolution)
-
+        printMost(mostATs, date, nums, oneSolution)
     target_solutions = {}
-    
     for norm, eqs in ATs.items():
         for eq in eqs:
             try:
@@ -128,9 +116,9 @@ def getAllSolutions(date, nums, ops = ['+', '-', '*', '/'], target=0, most=False
                 continue
             except SyntaxError:
                 continue
-    
     return target_solutions if target_solutions else "No Solutions"
 
+# Function to print the solutions
 def printSolutions(solutions):
     if isinstance(solutions, dict):
         for key, val in solutions.items():
@@ -138,40 +126,43 @@ def printSolutions(solutions):
     else:
         print(solutions)
 
+# Function to generate a list of dates starting from `start_date` for `num_days`
 def generate_dates(start_date: str, num_days: int) -> list:
-    """
-    Generate a list of dates starting from `start_date` for `num_days`.
-
-    Args:
-    start_date (str): The starting date in the format 'YYYY-MM-DD'.
-    num_days (int): The number of days for which to generate dates.
-
-    Returns:
-    list: A list of dates in the format 'YYYY-MM-DD'.
-    """
     start_date_obj = datetime.strptime(start_date, '%Y-%m-%d')
     date_list = [(start_date_obj + timedelta(days=i)).strftime('%Y-%m-%d') for i in range(num_days)]
     return date_list
 
-
-def main():
-
-
-    # Example usage
+# Main function to generate new levels
+def generate_levels():
     start_date = '2024-06-26'
     num_days = 30
     dates = generate_dates(start_date, num_days)
     for d in dates:
-        #nums = [5,6,7,8]
         nums = random.sample(range(2, 10), 4)
         ops = ['+', '-', '*', '/']
         target = 0
         printSolutions = True
         oneSolution = True
-
         solutions = getAllSolutions(d, nums, ops, target, printSolutions, oneSolution)
-        #printSolutions(solutions)
-        #print(f"NUMS: {nums}")
+        printSolutions(solutions)
+        print(f"NUMS: {nums}")
+
+# Main function to run the solver with fixed numbers
+def fixed_numbers_example(nums=[1,2,3,4],target=10):
+    ops = ['+', '-', '*', '/']
+    printSolutions = True
+    oneSolution = False
+    solutions = getAllSolutions('2024-06-26', nums, ops, target, printSolutions, oneSolution)
+    # printSolutions(solutions)
+
+# Main function to run the solver
+def main():
+    # Uncomment the following line to run the example usage
+    # generate_levels()
+
+    # Run the fixed numbers example
+    fixed_numbers_example([2,4,6,7],25)
 
 if __name__ == '__main__':
     main()
+
