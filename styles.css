@@ -98,7 +98,7 @@ h1, h2, p, div {
     position: fixed;
     bottom: 10px;
     right: 10px;
-    background-color: #69ff69;
+    background-color: #f83a00;
     color: white;
     border: none;
     border-radius: 50%;
@@ -128,7 +128,7 @@ h1, h2, p, div {
 }
 
 .help-menu button {
-    background-color: #e33a14;
+    background-color: #f83a00;
     color: white;
     border: none;
     padding: 10px 20px;
