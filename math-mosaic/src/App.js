@@ -6,8 +6,10 @@ import Digits from './components/Digits';
 import Operators from './components/Operators';
 import Navigation from './components/Navigation';
 import Popup from './components/Popup';
+// import HintPopup from './components/HintPopup';
 import HelpMenu from './components/HelpMenu';
 import FoundSolutions from './components/FoundSolutions';
+import Controls from './components/Controls';
 import levelsData from './levels.json';
 
 function App() {
@@ -61,7 +63,7 @@ function App() {
       const evalResult = eval(equation);
       setResult(evalResult);
     } catch (error) {
-      setResult('');
+      setResult('Error: Invalid expression');
     }
   }, [equation]);
 
@@ -75,16 +77,13 @@ function App() {
       <EquationContainer equation={equation} result={result} />
       <Digits numbers={currentLevel.numbers} onDigitClick={handleDigitClick} usedDigits={usedDigits} />
       <Operators onOperatorClick={handleOperatorClick} />
-      <div className='navigation-container'>
-        <button onClick={handleDelete}>Delete</button>
-        <button onClick={togglePopup}>Hint</button>
-        <button onClick={handleClear}>Clear</button>
-      </div>
+      <Controls onDelete={handleDelete} onHint={togglePopup} onClear={handleClear} />
       <div className="navigation-container">
         <Navigation />
       </div>
       {isPopupVisible && <Popup togglePopup={togglePopup} hint={currentLevel.hint} />}
       <FoundSolutions solutions={currentLevel.solutions} />
+      {/* <HintPopup /> */}
       <HelpMenu />
     </div>
   );
