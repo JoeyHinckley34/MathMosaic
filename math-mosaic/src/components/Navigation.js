@@ -1,13 +1,22 @@
 import React from 'react';
 
-function Navigation() {
+function Navigation({ levels, currentLevel, onLevelChange, onRandomLevel }) {
+  const handleSelectChange = (e) => {
+    const selectedLevel = levels.find(level => level.date === e.target.value);
+    onLevelChange(selectedLevel);
+  };
+
   return (
     <nav>
-      <button onClick={() => console.log('Random Level')}>Random Level</button>
-      <select onChange={(e) => console.log(e.target.value)}>
-        <option value="problem1">Problem 1</option>
-        <option value="problem2">Problem 2</option>
-        {/* Add more options as needed */}
+      <button onClick={onRandomLevel}>Random Level</button>
+      <select value={currentLevel?.date || ''} onChange={handleSelectChange}>
+        {levels
+          .filter(level => new Date(level.date) < new Date())
+          .map(level => (
+            <option key={level.date} value={level.date}>
+              {`${level.date}`}
+            </option>
+          ))}
       </select>
     </nav>
   );
