@@ -19,7 +19,7 @@ function App() {
   const [equation, setEquation] = useState('');
   const [usedDigits, setUsedDigits] = useState([]);
   const [result, setResult] = useState('');
-  const [foundSolutions, setFoundSolutions] = useState([]);
+  const [foundSolutions, setFoundSolutions] = useState({});
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -27,6 +27,7 @@ function App() {
     const today = new Date().toISOString().split('T')[0];
     const level = levelsData.dailyLevel.find(level => level.date === today);
     setCurrentLevel(level);
+    setFoundSolutions({}); // Initialize found solutions as an empty object
   }, []);
 
   const togglePopup = () => {
@@ -73,11 +74,6 @@ function App() {
   useEffect(() => {
     if (currentLevel && equation.trim() !== '') {
       try {
-        // Validate the equation
-        if (/[^0-9+\-*/().\s]/.test(equation)) {
-          throw new Error('Invalid characters in equation');
-        }
-
         // Evaluate the expression using mathjs
         const evalResult = evaluate(equation);
         setResult(evalResult);
@@ -88,7 +84,22 @@ function App() {
           console.log(`Used Digits: ${usedDigits}`);
           if (evalResult === currentLevel.target) {
             console.log(`Equation matches target: ${equation}`);
-            setFoundSolutions(prevSolutions => [...prevSolutions, equation]);
+            setFoundSolutions(prevSolutions => {
+              const newSolutions = { ...prevSolutions };
+              const numbersKey = JSON.stringify(usedDigits.sort());
+              const opsKey = JSON.stringify(equation.match(/[+\-*/]/g).sort());
+
+              if (!newSolutions[numbersKey]) {
+                newSolutions[numbersKey] = {};
+              }
+              if (!newSolutions[numbersKey][opsKey]) {
+                newSolutions[numbersKey][opsKey] = [];
+              }
+              if (!newSolutions[numbersKey][opsKey].includes(equation)) {
+                newSolutions[numbersKey][opsKey].push(equation);
+              }
+              return newSolutions;
+            });
           } else {
             console.log(`Result does not match target: ${currentLevel.target}`);
           }
@@ -97,10 +108,11 @@ function App() {
         }
       } catch (error) {
         console.error('Error evaluating expression:', error);
-        setError('Invalid expression');
+        //setError('Invalid expression');
       }
     } else {
       console.log('Current level or equation is not valid for evaluation');
+      setResult(''); // Set result to empty when there are no numbers in the equation
     }
   }, [equation, usedDigits, currentLevel]);
 

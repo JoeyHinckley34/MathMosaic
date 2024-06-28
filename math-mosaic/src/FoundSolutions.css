@@ -1,0 +1,33 @@
+.found-solutions {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.solution-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.numbers, .operators, .expression {
+  margin-right: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.expression {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.expression-item {
+  margin-right: 10px;
+  background-color: #f0f0f0;
+  padding: 5px;
+  border-radius: 5px;
+}
