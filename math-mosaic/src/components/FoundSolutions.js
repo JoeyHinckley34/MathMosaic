@@ -1,11 +1,13 @@
 import React from 'react';
 import '../FoundSolutions.css'; // Correct the import path
 
-function FoundSolutions({ solutions }) {
+function FoundSolutions({ solutions, totalSolutions }) {
+  const foundSolutionsCount = Object.keys(solutions).length;
+
   return (
     <div className="found-solutions">
-      <h2>Found Solutions</h2>
-      {Object.keys(solutions).length > 0 ? (
+      <h2>Found Solutions {foundSolutionsCount}/{totalSolutions}</h2>
+      {foundSolutionsCount > 0 ? (
         Object.entries(solutions).map(([numbers, opsSolutions], index) => (
           Object.entries(opsSolutions).map(([ops, expressions], idx) => {
             // Split the expression by operators to get the numbers

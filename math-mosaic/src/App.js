@@ -137,7 +137,7 @@ function App() {
       </div>
       {isPopupVisible && <Popup togglePopup={togglePopup} hint={currentLevel.hint} />}
       {error && <div className="error">{error}</div>}
-      <FoundSolutions solutions={foundSolutions} />
+      <FoundSolutions solutions={foundSolutions} totalSolutions={currentLevel.solutions} />
       <HelpMenu />
     </div>
   );
