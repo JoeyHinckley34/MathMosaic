@@ -27,7 +27,7 @@
         { "date": "2024-06-27", "target": 3, "numbers": [2, 6, 7, 8], "solutions": 6, "hint": "*6 or -7 or -2 or +6 or 72 or 78" },
         { "date": "2024-06-28", "target": 1, "numbers": [2, 3, 4, 6], "solutions": 8, "hint": "*2 or *4 or +6 or /4 or /2 or /6 or 24 or 23" },
         { "date": "2024-06-29", "target": 29, "numbers": [2, 3, 6, 9], "solutions": 5, "hint": "*3 or 36 or 26 or 32 or 92" },
-        { "date": "2024-06-30", "target": 23, "numbers": [3, 6, 7, 8], "solutions": 4, "hint": "+8 or +7 or 87 or 37" },
+        { "date": "2024-06-30", "target": 23, "numbers": [3, 6, 7, 8], "solutions": 4, "hint": "*3 or /3 or 87 or 37" },
         { "date": "2024-07-01", "target": 15, "numbers": [2, 3, 4, 7], "solutions": 7, "hint": "-3 or -4 or 27 or 72 or 24 or 32 or 47" },
         { "date": "2024-07-02", "target": 7, "numbers": [3, 5, 8, 9], "solutions": 3, "hint": "-8 or +5 or 38" },
         { "date": "2024-07-03", "target": 15, "numbers": [3, 6, 8, 9], "solutions": 5, "hint": "*9 or +9 or 69 or 96 or 63" },
