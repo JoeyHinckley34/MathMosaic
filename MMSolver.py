@@ -83,7 +83,7 @@ def printMost(most, date, nums, oneSolution):
     sortedMost = sorted(most.items(), key=lambda x: len(x[1]), reverse=False)
     if oneSolution:
         v = sortedMost[-random.randint(1, 4)]
-        print('{ date: "', date, '", target: ', v[0], ', numbers: ', sorted(nums), ', solutions: ', len(v[1]), ', hint: "', getHints(v), '" },', sep='')
+        print('{ "date": "', date, '", "target": ', v[0], ', "numbers": ', sorted(nums), ', "solutions": ', len(v[1]), ', "hint": "', getHints(v), '" },', sep='')
     else:
         for v in sortedMost:
             print("\n")
@@ -94,7 +94,7 @@ def printMost(most, date, nums, oneSolution):
                         print(y)
                 else:
                     print(x)
-            print('\n{ date: "', date, '", target: ', v[0], ', numbers: ', nums, ', solutions: ', len(v[1]), ', hint: "', getHints(v), '" },\n\n', sep='')
+            print('\n{ "date": "', date, '", "target": ', v[0], ', "numbers": ', nums, ', "solutions": ', len(v[1]), ', "hint": "', getHints(v), '" },\n\n', sep='')
 
 # Main function to get all solutions for a given date, numbers, and operators
 def getAllSolutions(date, nums, ops=['+', '-', '*', '/'], target=0, most=False, oneSolution=False):
@@ -134,8 +134,8 @@ def generate_dates(start_date: str, num_days: int) -> list:
 
 # Main function to generate new levels
 def generate_levels():
-    start_date = '2024-06-26'
-    num_days = 30
+    start_date = '2024-07-26'
+    num_days = 159
     dates = generate_dates(start_date, num_days)
     for d in dates:
         nums = random.sample(range(2, 10), 4)
@@ -144,8 +144,8 @@ def generate_levels():
         printSolutions = True
         oneSolution = True
         solutions = getAllSolutions(d, nums, ops, target, printSolutions, oneSolution)
-        printSolutions(solutions)
-        print(f"NUMS: {nums}")
+        # printSolutions(solutions)
+        # print(f"NUMS: {nums}")
 
 # Main function to run the solver with fixed numbers
 def fixed_numbers_example(nums=[1,2,3,4],target=10):
@@ -158,10 +158,10 @@ def fixed_numbers_example(nums=[1,2,3,4],target=10):
 # Main function to run the solver
 def main():
     # Uncomment the following line to run the example usage
-    # generate_levels()
+    generate_levels()
 
     # Run the fixed numbers example
-    fixed_numbers_example([2,4,6,7],25)
+    #fixed_numbers_example([2,4,6,7],25)
 
 if __name__ == '__main__':
     main()
