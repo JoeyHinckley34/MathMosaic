@@ -134,8 +134,8 @@ def generate_dates(start_date: str, num_days: int) -> list:
 
 # Main function to generate new levels
 def generate_levels():
-    start_date = '2024-07-26'
-    num_days = 159
+    start_date = '2025-01-01'
+    num_days = 365
     dates = generate_dates(start_date, num_days)
     for d in dates:
         nums = random.sample(range(2, 10), 4)
@@ -152,7 +152,7 @@ def fixed_numbers_example(nums=[1,2,3,4],target=10):
     ops = ['+', '-', '*', '/']
     printSolutions = True
     oneSolution = False
-    solutions = getAllSolutions('2024-06-26', nums, ops, target, printSolutions, oneSolution)
+    solutions = getAllSolutions('2025-01-01', nums, ops, target, printSolutions, oneSolution)
     # printSolutions(solutions)
 
 # Main function to run the solver
